@@ -1,11 +1,11 @@
 const {Dog, Temperament} = require('../db.js');
 const {API_KEY} = process.env;
 const axios = require('axios');
+const {Op} = require('sequelize');
 
 async function getApiTemperaments () {
     const temperaments = [];
     const data = await getDogsAPI();
-    console.log(data)
     data.forEach(dog =>{
         if(dog.temperament){
             const arr = dog.temperament.split(', ');
@@ -19,7 +19,7 @@ async function getApiTemperaments () {
 }
 
 
-
+//podria retornar solo los datos que voy a utilizar para optimizar
 async function getDogsAPI(name){
     if(name) {
         const {data} = await axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${name}&&api_key=${API_KEY}`)
@@ -34,13 +34,15 @@ async function getDogsDB(name){
     if(name) {
         const races = await Dog.findAll({
             where: {
-                name: name
+                name: {
+                    [Op.like]: `%${name}%`
+                } 
             },
             include: {
                 model: Temperament,
                 attributes: ['name'],
                 through: {
-                    attributes: []
+                    attributes: [] //  traelo sobre la tabla atributos
                 }
             }
         })

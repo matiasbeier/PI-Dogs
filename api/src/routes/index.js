@@ -10,7 +10,6 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 
-
 router.post('/dogs', async (req,res) =>{
     const {name, 
         min_heigth, 
@@ -49,14 +48,13 @@ router.post('/dogs', async (req,res) =>{
 
 
 router.get('/dogs', async (req,res) =>{
-    const {name} = req.query;
-        const dogsAPI = await getDogsAPI(name);
-        const dogsDB = await getDogsDB(name)
+    let {name} = req.query;
+        name = name.toLowerCase();
+        const [dogsAPI, dogsDB ] = await Promise.all([getDogsAPI(name), getDogsDB(name)])
         if(dogsAPI || dogsDB){
             console.log(dogsDB)
             let total = dogsAPI.concat(dogsDB);
             total = total.map(dog => {
-                
                 return ({
                     name: dog.name,
                     image: dog.image,
@@ -71,8 +69,6 @@ router.get('/dogs', async (req,res) =>{
 })
 
 
-
-
 router.get('/dogs/:id', async (req,res) =>{
     const {id} = req.params;
     try{
@@ -85,12 +81,16 @@ router.get('/dogs/:id', async (req,res) =>{
 
 
 router.get('/temperaments', async (req,res) =>{
-    const temperaments = await getApiTemperaments();
-    await temperaments.forEach(temp => Temperament.create({
-        name: temp
-    }))
-    console.log('done')
-    res.send('listo');
+    try{
+        const temperaments = await getApiTemperaments();
+        await temperaments.forEach(temp => Temperament.create({
+            name: temp
+        }))
+        console.log('done')
+        res.send('ready');
+    }catch(e){
+        res.send(e);
+    }
 })
 
 
