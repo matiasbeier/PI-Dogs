@@ -27,6 +27,13 @@ module.exports = (sequelize) => {
     },
     origin: {
       type: DataTypes.STRING
+    },
+    created_by_me: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
+    image: {
+      type: DataTypes.JSON,
     }
 
   });

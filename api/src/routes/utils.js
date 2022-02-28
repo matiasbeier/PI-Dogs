@@ -1,82 +1,136 @@
 const {Dog, Temperament} = require('../db.js');
 const {API_KEY} = process.env;
+const axios = require('axios');
 
 async function getApiTemperaments () {
     const temperaments = [];
-    const dogs = await fetch(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
-    dogs.json().forEach(dog =>{
-        const arr = dog.temperament.split(', ');
-        for(let i = 0; i < arr.length; i++){
-            if(!temperaments.includes(arr[i])) temperaments.push(arr[i]);
+    const data = await getDogsAPI();
+    console.log(data)
+    data.forEach(dog =>{
+        if(dog.temperament){
+            const arr = dog.temperament.split(', ');
+            for(let i = 0; i < arr.length; i++){
+                if(!temperaments.includes(arr[i])) temperaments.push(arr[i]);
+            }
         }
-        
     })
-    return temperaments; // array con todos los temperamentos posibles
+         // array con todos los temperamentos posibles
+    return temperaments
 }
 
-function fromStringToArray(string){
-        const arr = string.split(', ');
-}
+
 
 async function getDogsAPI(name){
     if(name) {
-        const races = await fetch(`https://api.thedogapi.com/v1/breeds/search?q=${name}&&api_key=${API_KEY}`)
-        const breeds = races.json();
-        if(breeds) {
-           return breeds; 
-        } else {
-            return null
-        }
-    } else {
-        const races = await fetch(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
-        const breeds = races.json();
-        return breeds;
+        const {data} = await axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${name}&&api_key=${API_KEY}`)
+        if(data) return data; 
+        return null
     }
+    const {data} = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
+    return data;
 }
 
 async function getDogsDB(name){
     if(name) {
         const races = await Dog.findAll({
             where: {
-                name: {
-                    includes: name
+                name: name
+            },
+            include: {
+                model: Temperament,
+                attributes: ['name'],
+                through: {
+                    attributes: []
                 }
             }
         })
         if(races){
-            return races;
+            return races.map( race => {
+                return {
+                name: race.name,
+                image: race.image,
+                temperament: race.temperaments.map(t => t.name),
+                created_by_me: race.created_by_me
+                }
+            });
         } else {
             return null;
         }
 
     } else {
-        const races = await Dog.findAll()
-        return races;
+        const races = await Dog.findAll({
+            include: {
+                model: Temperament,
+                attributes: ['name'],
+                through: {
+                    attributes: []
+                }
+            }
+        })
+        return races.map( race => {
+            return {
+            id: race.id,
+            name: race.name,
+            image: race.image,
+            temperament: race.temperaments.map(t => t.name),
+            created_by_me: race.created_by_me,
+            heigth: race.heigth,
+            weigth: race.weigth,
+            life_span: race.life_span,
+            origin: race.origin
+        }});
     }
 }
 
-//crear un arreglo de promesas y hacerlo con promiseAll
-function addTemperament(temperament, dog){
-    const temp = temperament.split(", ");
-    const allTempPromises = temp.map(element => {
-        const dogTemperaments = Temperament.findOrCreate({
-            where: {
-                name: element
-            }
-        })
-        return dogTemperaments;
-    });
-    Promise.all(allTempPromises)
-        .then(allTemp =>{
-            allTemp.forEach(temp => dog.addTemperament(temp)) 
-        }) 
+
+
+async function addTemperament(temperament, dog){
+    if(temperament){
+
+        const temp = temperament.split(", ");
+        temp.forEach(async element => {
+            const [t, v] = await Temperament.findOrCreate({
+                where: {
+                    name: element
+                }
+            })
+
+            dog.addTemperament(t)
+        });
+
+    }
+}
+
+async function getDogByID(id){
+    const dogsDB = await getDogsDB();
+    const dog = dogsDB.find(d => d.id === id);
+    if(dog) return dog;
+
+    const dogAPI = await getDogsAPI();
+    console.log(dogAPI)
+    const doggy = dogAPI.find(d => Number(d.id) === Number(id));
+    if(doggy) {
+        return doggy;
+    } else {
+        throw new Error('No dog was found with that id');
+    }
     
 }
 
+/* const [allTempPromises, veracidad] = temp.map(async element => {
+    return await Temperament.findOrCreate({
+        where: {
+            name: element
+        }
+    })
+});
+console.log(allTempPromises)
+if(allTempPromises.length) allTempPromises.forEach((temp) => dog.addTemperament(temp.id))  */
 
 module.exports = {
     getApiTemperaments,
     getDogsAPI,
     getDogsDB,
-    addTemperament
+    addTemperament,
+    getDogByID
 }
