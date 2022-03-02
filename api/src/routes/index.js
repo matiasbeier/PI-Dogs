@@ -28,7 +28,7 @@ router.post('/dogs', async (req,res) =>{
         const weigth = {metric: min_weigth + " - " + max_weigth};
         const life_span = life_span_min + " - " + life_span_max;
         try{
-            const dog = await Dog.create({
+            let dog = await Dog.create({
                     name,
                     heigth,
                     weigth,
@@ -37,8 +37,8 @@ router.post('/dogs', async (req,res) =>{
                     image: {url: image},
                     
             })
-            await addTemperament(temperament, dog);
-            return res.send('Dog succesfully created');
+            const newDog = await addTemperament(temperament, dog);
+            return res.send(newDog);
         } catch(e){
             res.send(e);
         }
@@ -49,17 +49,18 @@ router.post('/dogs', async (req,res) =>{
 
 router.get('/dogs', async (req,res) =>{
     let {name} = req.query;
-        name = name.toLowerCase();
+        name = name?.toLowerCase();
         const [dogsAPI, dogsDB ] = await Promise.all([getDogsAPI(name), getDogsDB(name)])
         if(dogsAPI || dogsDB){
             console.log(dogsDB)
             let total = dogsAPI.concat(dogsDB);
             total = total.map(dog => {
+                console.log(dog)
                 return ({
                     name: dog.name,
                     image: dog.image,
                     temperament: Array.isArray(dog.temperament) ? dog.temperament.join(', ') : dog.temperament, 
-                    created_by_me: dog.created_by_me ? true : false
+                    created_by_me: dog.created_by_me? dog.created_by_me : false
                 })
             })
             res.send(total)
@@ -73,7 +74,11 @@ router.get('/dogs/:id', async (req,res) =>{
     const {id} = req.params;
     try{
         const dog = await getDogByID(id);
-        res.send(dog);
+        if(dog.name){
+            return res.send(dog);
+        }
+        return res.status(404).send(dog)
+        
     }catch(e){
         res.send(e)
     }
@@ -83,11 +88,15 @@ router.get('/dogs/:id', async (req,res) =>{
 router.get('/temperaments', async (req,res) =>{
     try{
         const temperaments = await getApiTemperaments();
-        await temperaments.forEach(temp => Temperament.create({
-            name: temp
+        //tendria que hacerlo con un findOrCreate, aca funciona porque se rompe la base de datos cada vez que
+        //sacamos el npm start.
+        await temperaments.forEach( temp => Temperament.findOrCreate({
+            where:{
+                name: temp
+            }
         }))
-        console.log('done')
-        res.send('ready');
+        const temperamens_from_db = await Temperament.findAll()
+        res.send(temperamens_from_db);
     }catch(e){
         res.send(e);
     }

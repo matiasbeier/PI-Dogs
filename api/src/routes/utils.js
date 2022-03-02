@@ -21,12 +21,21 @@ async function getApiTemperaments () {
 
 //podria retornar solo los datos que voy a utilizar para optimizar
 async function getDogsAPI(name){
+    let {data} = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
     if(name) {
-        const {data} = await axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${name}&&api_key=${API_KEY}`)
-        if(data) return data; 
-        return null
+        let dogs = [];
+        dogs = data.filter( race => {
+            if(race.name.toLowerCase().includes(name)){
+                return {
+                    name: race.name,
+                    image: race.image,
+                    temperament: race.temperament,
+                    created_by_me: false
+                }
+            }
+            });
+        return dogs
     }
-    const {data} = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
     return data;
 }
 
@@ -58,7 +67,6 @@ async function getDogsDB(name){
         } else {
             return null;
         }
-
     } else {
         const races = await Dog.findAll({
             include: {
@@ -88,19 +96,24 @@ async function getDogsDB(name){
 
 async function addTemperament(temperament, dog){
     if(temperament){
-
         const temp = temperament.split(", ");
-        temp.forEach(async element => {
+        await temp.forEach(async element => {
             const [t, v] = await Temperament.findOrCreate({
                 where: {
                     name: element
                 }
             })
-
+//si me dicen que no puedo crear nuevos temperamentos cambio el finOrCreate por un findAll y en el name: pongo
+// name: temperament.map(el => el)
             dog.addTemperament(t)
         });
-
-    }
+    };
+    return {
+        name: dog.name,
+        image: dog.image,
+        temperament: temperament,
+        created_by_me: true
+    } 
 }
 
 async function getDogByID(id){
@@ -114,7 +127,7 @@ async function getDogByID(id){
     if(doggy) {
         return doggy;
     } else {
-        throw new Error('No dog was found with that id');
+        return ('No dog was found with that id');
     }
     
 }
