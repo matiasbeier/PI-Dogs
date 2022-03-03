@@ -1,20 +1,21 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllDogs } from "../../actions";
 import Dogs from "../Dogs/Dogs";
-import SearchBar from "../SearchBar/SearchBar"
 import NextPageBar from "../NextPageBar/NextPageBar"
+import NavBar from "../NavBar/NavBar";
 
 const Home = () =>{
+    let {dogs} = useSelector(state => state)
     const dispatch = useDispatch();
 
     useEffect(() =>{
         dispatch(getAllDogs())
-    }, []);
+    }, [dispatch]);
 
     return (
         <div>
-            <SearchBar />
+            <NavBar />
             <Dogs />
             <NextPageBar />
             <h3>

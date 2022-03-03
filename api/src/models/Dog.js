@@ -14,11 +14,11 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    heigth: {
+    height: {
       type: DataTypes.JSON,
       allowNull: false
     },
-    weigth:  {
+    weight:  {
       type: DataTypes.JSON,
       allowNull: false
     },

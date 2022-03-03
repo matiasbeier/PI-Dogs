@@ -1,6 +1,7 @@
 const initialState = {
     dogs: [],
-    dog: {}
+    dog: {},
+    temperaments: []
 }
 
 
@@ -16,6 +17,12 @@ function reducer(state = initialState, action){
             state.dogs.push(action.payload)
             return {
                 ...state
+            }
+
+        case 'GET_TEMPERAMENTS':
+            return {
+                ...state,
+                temperaments: action.payload
             }
 
         default:

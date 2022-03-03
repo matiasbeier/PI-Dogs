@@ -84,8 +84,8 @@ async function getDogsDB(name){
             image: race.image,
             temperament: race.temperaments.map(t => t.name),
             created_by_me: race.created_by_me,
-            heigth: race.heigth,
-            weigth: race.weigth,
+            height: race.height,
+            weight: race.weight,
             life_span: race.life_span,
             origin: race.origin
         }});

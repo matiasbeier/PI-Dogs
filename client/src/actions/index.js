@@ -54,7 +54,7 @@ export const createDog = (newDog) =>{
 
 export const getTemperaments = () =>{
     return function(dispatch){
-        return axios.get('http://localhost:3001/tempearments')
+        return axios.get('http://localhost:3001/temperaments')
         .then(({data}) => {
             dispatch({type: 'GET_TEMPERAMENTS', payload: data})
         })

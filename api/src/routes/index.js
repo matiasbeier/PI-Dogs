@@ -12,10 +12,10 @@ const router = Router();
 
 router.post('/dogs', async (req,res) =>{
     const {name, 
-        min_heigth, 
-        max_heigth, 
-        min_weigth, 
-        max_weigth, 
+        min_height, 
+        max_height, 
+        min_weight, 
+        max_weight, 
         life_span_min, 
         life_span_max, 
         origin, 
@@ -23,15 +23,15 @@ router.post('/dogs', async (req,res) =>{
         image
     } = req.body;
 
-    if(name && min_heigth && max_heigth && min_weigth && max_weigth) {
-        const heigth = {metric: min_heigth + " - " + max_heigth};
-        const weigth = {metric: min_weigth + " - " + max_weigth};
+    if(name && min_height && max_height && min_weight && max_weight) {
+        const height = {metric: min_height + " - " + max_height};
+        const weight = {metric: min_weight + " - " + max_weight};
         const life_span = life_span_min + " - " + life_span_max;
         try{
             let dog = await Dog.create({
                     name,
-                    heigth,
-                    weigth,
+                    height,
+                    weight,
                     life_span,
                     origin,
                     image: {url: image},
@@ -43,7 +43,7 @@ router.post('/dogs', async (req,res) =>{
             res.send(e);
         }
     } 
-    res.status(400).send('Fields name, heigth and weigth are require');
+    res.status(400).send('Fields name, height and weight are require');
 })
 
 
@@ -57,8 +57,9 @@ router.get('/dogs', async (req,res) =>{
             total = total.map(dog => {
                 console.log(dog)
                 return ({
+                    id: dog.id,
                     name: dog.name,
-                    image: dog.image,
+                    image: dog.image.url,
                     temperament: Array.isArray(dog.temperament) ? dog.temperament.join(', ') : dog.temperament, 
                     created_by_me: dog.created_by_me? dog.created_by_me : false
                 })

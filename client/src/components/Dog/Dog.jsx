@@ -1,9 +1,11 @@
 import React from 'react';
 
-const Dog = () =>{
+const Dog = ({image, name, temperament}) =>{
     return (
         <div>
-
+            <img src={image} alt="dog's image not found" />
+            <h1>{name}</h1>
+            <h3>{temperament}</h3>
         </div>
     )
 }
