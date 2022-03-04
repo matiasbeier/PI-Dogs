@@ -97,18 +97,15 @@ async function getDogsDB(name){
 async function addTemperament(temperament, dog){
     if(temperament){
         const temp = temperament.split(", ");
-        await temp.forEach(async element => {
-            const [t, v] = await Temperament.findOrCreate({
-                where: {
-                    name: element
-                }
-            })
-//si me dicen que no puedo crear nuevos temperamentos cambio el finOrCreate por un findAll y en el name: pongo
-// name: temperament.map(el => el)
+        const t = await Temperament.findAll({
+            where: {
+                name: temp.map(el => el)
+            }
+        })
             dog.addTemperament(t)
-        });
     };
     return {
+        id: dog.id,
         name: dog.name,
         image: dog.image,
         temperament: temperament,
@@ -132,15 +129,6 @@ async function getDogByID(id){
     
 }
 
-/* const [allTempPromises, veracidad] = temp.map(async element => {
-    return await Temperament.findOrCreate({
-        where: {
-            name: element
-        }
-    })
-});
-console.log(allTempPromises)
-if(allTempPromises.length) allTempPromises.forEach((temp) => dog.addTemperament(temp.id))  */
 
 module.exports = {
     getApiTemperaments,

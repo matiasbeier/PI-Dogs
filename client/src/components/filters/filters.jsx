@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 const Filters = () =>{
 
-    let {temperaments} = useSelector(state => state)
+    const {temperaments} = useSelector(state => state)
 
     return (
         <div>

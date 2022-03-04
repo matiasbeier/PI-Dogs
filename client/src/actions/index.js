@@ -31,8 +31,6 @@ export const getDogsByName = (name) =>{
         }
     }
 } */
-
-
 export const getDogDetail = (id) =>{
     return function(dispatch){
         return axios.get('http://localhost:3001/dogs/' + id)
@@ -44,7 +42,7 @@ export const getDogDetail = (id) =>{
 
 export const createDog = (newDog) =>{
     return function(dispatch){
-        return axios.post('http://localhost:3001/dogs', newDog)
+        return axios.post('http://localhost:3001/dogs', {newDog})
         .then(({data}) =>{
             dispatch({type: 'CREATE_DOG', payload: data})
         })
@@ -58,5 +56,11 @@ export const getTemperaments = () =>{
         .then(({data}) => {
             dispatch({type: 'GET_TEMPERAMENTS', payload: data})
         })
+    }
+}
+
+export const resetDogDetail = () =>{
+    return function(dispatch){
+        dispatch({type: 'RESET_DOG_DETAIL'})
     }
 }

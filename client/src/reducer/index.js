@@ -14,15 +14,26 @@ function reducer(state = initialState, action){
             }
 
         case 'CREATE_DOG':
-            state.dogs.push(action.payload)
             return {
-                ...state
+                ...state,
+                dogs: [...state.dogs, action.payload]
             }
 
         case 'GET_TEMPERAMENTS':
             return {
                 ...state,
                 temperaments: action.payload
+            }
+
+        case 'GET_DOG_DETAIL':
+            return {
+                ...state,
+                dog: action.payload
+            }
+        case 'RESET_DOG_DETAIL':
+            return {
+                ...state,
+                dog: {}
             }
 
         default:

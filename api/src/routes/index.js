@@ -12,20 +12,20 @@ const router = Router();
 
 router.post('/dogs', async (req,res) =>{
     const {name, 
-        min_height, 
-        max_height, 
-        min_weight, 
-        max_weight, 
+        height_min, 
+        height_max, 
+        weight_min, 
+        weight_max, 
         life_span_min, 
         life_span_max, 
         origin, 
         temperament, 
         image
-    } = req.body;
+    } = req.body.newDog;
 
-    if(name && min_height && max_height && min_weight && max_weight) {
-        const height = {metric: min_height + " - " + max_height};
-        const weight = {metric: min_weight + " - " + max_weight};
+    if(name && height_min && height_max && weight_min && weight_max) {
+        const height = {metric: height_min + " - " + height_max};
+        const weight = {metric: weight_min + " - " + weight_max};
         const life_span = life_span_min + " - " + life_span_max;
         try{
             let dog = await Dog.create({
@@ -35,15 +35,15 @@ router.post('/dogs', async (req,res) =>{
                     life_span,
                     origin,
                     image: {url: image},
-                    
             })
             const newDog = await addTemperament(temperament, dog);
+            console.log(newDog)
             return res.send(newDog);
         } catch(e){
-            res.send(e);
+            return res.send(e);
         }
     } 
-    res.status(400).send('Fields name, height and weight are require');
+    res.status(404).send('Fields name, height and weight are require');
 })
 
 
