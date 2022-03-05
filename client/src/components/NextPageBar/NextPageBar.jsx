@@ -1,10 +1,27 @@
 import React from 'react';
 
-const NextPageBar = () =>{
-    return (
-        <div>
+const NextPageBar = ({postPerPage, totalPost, paginate}) =>{
+    const totalPage = [];
 
-        </div>
+    for (let i = 1 ; i <= Math.ceil(totalPost / postPerPage) ; i++) {
+        totalPage.push(i);
+    }
+    return (
+        <nav>
+            <ul>
+                {
+                    totalPage?.map(number =>{
+                        return (
+                            <li key={number}>
+                                <a onClick={() => paginate(number)} >
+                                    {number}
+                                </a>
+                            </li>
+                        )
+                    })
+                }
+            </ul>
+        </nav>
     )
 }
 

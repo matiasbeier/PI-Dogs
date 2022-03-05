@@ -41,6 +41,25 @@ const CreateDog = () => {
         dispatch(createDog(input))
     }
 
+    function handleSelectTemperament(e){
+        if(input.temperament === "") setInput({...input, temperament: []})
+        if (Array.isArray(input.temperament)){
+
+            if(input.temperament.includes("")){
+                setInput({...input, temperament: [...input.temperament.filter(t=> t !== ""), e.target.value]})
+                e.target.value = false
+            } else {
+                setInput({...input, temperament: [...input.temperament, e.target.value]})
+                e.target.value = false
+            }
+        }
+        if(typeof(input.temperament) === "string" && input.temperament !== ""){
+            let arr = input.temperament.split(',');
+            setInput({...input, temperament: arr})
+        }
+    }
+
+
     return (
         <form onSubmit={e => handleSubmit(e)}>
             <>
@@ -84,11 +103,12 @@ const CreateDog = () => {
             <br />
             <>
                 <label htmlFor="temp">Temperament/s: </label>
-                <input type="text" id='temp' placeholder='temperament...' value={input.temperament} onChange={e=>handleChange(e)} name='temperament' />
-                <select name="" id="">
+                <input  id='temp' placeholder='temperament...' value={input.temperament} onChange={e=>handleChange(e)} name='temperament' />
+                <select onClick={(e)=>handleSelectTemperament(e)}  >
+                    <option ></option>
                     {
                         temperaments?.map(temp =>{
-                            return (<option value="temp" key={temp.id}>{temp.name}</option>)
+                            return (<option value={temp.name} key={temp.id}>{temp.name}</option>)
                         })
                     
                     }

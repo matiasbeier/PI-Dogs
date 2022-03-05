@@ -64,3 +64,19 @@ export const resetDogDetail = () =>{
         dispatch({type: 'RESET_DOG_DETAIL'})
     }
 }
+
+export const orderAsc = () =>{
+    return {type: 'ORDER_ASC'}
+}
+
+export const orderDes = () =>{
+    return {type: 'ORDER_DES'}
+}
+
+export const filterByTemperament = (temp) =>{
+    return {type: 'FILTER_BY_TEMPERAMENT', payload: temp}
+}
+
+export const filterByApiOrDb = (value) =>{
+    return {type: 'FILTER_BY_API_OR_DB', payload: value}
+}
