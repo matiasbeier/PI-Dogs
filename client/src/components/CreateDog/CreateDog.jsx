@@ -12,7 +12,7 @@ const CreateDog = () => {
         height_min: "",
         height_max: "",
         weight_min: "",
-        weight_max: "",
+        weight_max: "", 
         life_span_min: "",
         life_span_max: "",
         origin: "",
@@ -31,7 +31,7 @@ const CreateDog = () => {
     function handleChange(e){
         setInput({...input, [e.target.name]: e.target.value});
 
-        let objError = validate({...input, [e.target.name]: e.target.value});
+        let objError = validate({...input, [e.target.name]: e.target.value}, temperaments);
         setError(objError)
     }
 
@@ -104,7 +104,7 @@ const CreateDog = () => {
             <>
                 <label htmlFor="temp">Temperament/s: </label>
                 <input  id='temp' placeholder='temperament...' value={input.temperament} onChange={e=>handleChange(e)} name='temperament' />
-                <select onClick={(e)=>handleSelectTemperament(e)}  >
+                <select onClick={(e)=>handleSelectTemperament(e)} >
                     <option ></option>
                     {
                         temperaments?.map(temp =>{
@@ -114,6 +114,7 @@ const CreateDog = () => {
                     }
                 </select>
             </>
+            {error.temperament && (<span>{error.temperament}</span>)}
             <img src="" alt="" />
             <button type='submit'>Create</button>
         </form>

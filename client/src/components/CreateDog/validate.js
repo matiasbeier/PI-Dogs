@@ -1,4 +1,4 @@
-export default function validate(input){
+export default function validate(input, temperaments){
     let error = {}
     if(!input.name) {
         error.name = "name is required"
@@ -32,8 +32,26 @@ export default function validate(input){
         error.origin = "origin is invalid"
     }
 
-/*     if(input.temperament && !temperaments?.includes(input.temperament)){
-        error.temperament = "temperament is invalid"
-    } */
+    if(/[0-9]{1}/.test(input.temperament)){
+        error.temperament = "shouldn't have numbers"
+    } else if(typeof(input.temperament) === "string" && input.temperament !== ""){
+        const tempToArray = input.temperament.split(',')
+        for (let i = 0; i < tempToArray.length; i++) {
+            if(!temperaments.find(el => el.name.toLowerCase() === tempToArray[i].toLowerCase())){
+                error.temperament = "only temperaments from list"
+            } else{
+                error.temperament = null
+            }
+        }
+    } else if(Array.isArray(input.temperament)){
+        
+        for (let i = 0; i <input.temperament.length; i++) {
+            if(input.temperament[i] === "") continue;
+            if(!temperaments.find(el => el === input.temperament[i])){
+                error.temperament = "only temperaments from list"
+            }
+        }      
+    }
+    
     return error;
 }

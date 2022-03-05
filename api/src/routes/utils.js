@@ -96,10 +96,10 @@ async function getDogsDB(name){
 
 async function addTemperament(temperament, dog){
     if(temperament){
-        const temp = temperament.split(", ");
+        if(typeof(temperament) === "string") temperament = temperament.split(',');
         const t = await Temperament.findAll({
             where: {
-                name: temp.map(el => el)
+                name: temperament.map(el => el[0].toUpperCase().concat(el.slice(1)))
             }
         })
             dog.addTemperament(t)
