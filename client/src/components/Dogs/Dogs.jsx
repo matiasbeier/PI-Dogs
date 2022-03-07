@@ -2,16 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Dog from '../Dog/Dog'
+import s from './Dogs.module.css'
 
 const Dogs = ({currentDogs, loading}) =>{
     return loading 
     ? (<h1>Loading...</h1>)
     : (
-        <ul>
+        <ul className={s.container}>
             {
                 currentDogs?.map(dog =>{
                     return (
-                        <li key={dog.id}>
+                        <li key={dog.id} >
                             <Link to ={`/home/dog/${dog.id}/detail`}  >
                                 <Dog 
                                 key={dog.id}

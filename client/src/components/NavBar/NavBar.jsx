@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
 import { getAllDogs } from '../../actions';
+import s from './NavBar.module.css'
 
 const NavBar = () =>{
     const location = useLocation();
@@ -15,18 +16,18 @@ const NavBar = () =>{
     }
 
     return (
-        <div>
+        <div className={s.container} >
             {
                 location.pathname === '/home'
-                ? (<button onClick={e => handleRefresh(e)}>Home</button>)
+                ? (<button onClick={e => handleRefresh(e)} className={s.btn}>Home</button>)
                 : (
                     <Link to='/home'>
-                        <button >Home</button>
+                        <button className={s.btn}>Home</button>
                     </Link>
                 )
             }
             <Link to='/home/dog/create'>
-                <button>Create</button>
+                <button className={s.btn}>Create</button>
             </Link>
         </div>
     )

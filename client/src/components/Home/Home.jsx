@@ -5,6 +5,7 @@ import Dogs from "../Dogs/Dogs";
 import NextPageBar from "../NextPageBar/NextPageBar"
 import SearchBar from "../SearchBar/SearchBar";
 import NavBar from "../NavBar/NavBar"
+import s from './Home.module.css'
 
 const Home = () =>{
     let {dogsFiltered} = useSelector(state => state)
@@ -30,7 +31,7 @@ const Home = () =>{
     }, [dispatch]);
 
     return (
-        <div>
+        <div className={s.home}>
             <NavBar />
             <SearchBar />
             <NextPageBar postPerPage={dogsPerPage} totalPost={dogsFiltered?.length} paginate={paginate} />

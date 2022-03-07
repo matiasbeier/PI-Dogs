@@ -1,0 +1,17 @@
+.img {
+    width: 16rem;
+    height: 13rem;
+    border-radius: 1rem 1rem 0 0;
+}
+.card {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 16rem;
+    height: 30rem;
+    margin: 0 1rem 1rem 0;
+    padding: 0rem;
+    border: 1px solid rgb(182, 182, 241);
+    border-radius: 1rem;
+    box-shadow: 5px 10px rgb(155, 152, 152);
+}

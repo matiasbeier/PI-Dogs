@@ -10,7 +10,6 @@ import DogDetail from './components/DogDetail/DogDetail';
 function App() {
   return (
     <div className="App">
-      <h1>Henry Dogs</h1>
       <Route path={'/'} exact component={PageInitial} />
       <Route path={'/home'} exact component={Home} />
       <Route path={'/home/dog/create'} exact component={CreateDog} />
