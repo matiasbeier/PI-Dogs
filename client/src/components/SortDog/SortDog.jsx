@@ -16,11 +16,11 @@ const SortDog = () =>{
 
     return (
         <div>
-            <select onClick={e => handleSortByName(e)} >
+            <select onChange={e => handleSortByName(e)} >
                 <option value="asc" >a-z</option>
                 <option value="desc" >z-a</option>
             </select>
-            <select onClick={e => handleSortByWeigth(e)}>
+            <select onChange={e => handleSortByWeigth(e)}>
                 <option value="ligth">ligthweight</option>
                 <option value="heavy">heavyweight</option>
             </select>

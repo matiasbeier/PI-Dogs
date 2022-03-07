@@ -17,6 +17,7 @@ const Dogs = ({currentDogs, loading}) =>{
                                 key={dog.id}
                                 image={dog.image}
                                 name={dog.name}
+                                weight={dog.weight}
                                 temperament={dog.temperament}
                                 />
                             </Link>

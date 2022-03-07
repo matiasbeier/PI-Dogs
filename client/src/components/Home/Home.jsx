@@ -4,7 +4,7 @@ import { getAllDogs, getTemperaments, filterByTemperament } from "../../actions"
 import Dogs from "../Dogs/Dogs";
 import NextPageBar from "../NextPageBar/NextPageBar"
 import SearchBar from "../SearchBar/SearchBar";
-
+import NavBar from "../NavBar/NavBar"
 
 const Home = () =>{
     let {dogsFiltered} = useSelector(state => state)
@@ -22,16 +22,16 @@ const Home = () =>{
 
 
     useEffect(() =>{
-        setLoading(true)
-        dispatch(getAllDogs())
+        setLoading(true);
+        dispatch(getAllDogs());
         dispatch(getTemperaments())
-        .then(()=>dispatch(filterByTemperament("all")))        
+        .then(()=>dispatch(filterByTemperament("all")))
         .then(()=>setLoading(false))
     }, [dispatch]);
 
-
     return (
         <div>
+            <NavBar />
             <SearchBar />
             <NextPageBar postPerPage={dogsPerPage} totalPost={dogsFiltered?.length} paginate={paginate} />
             <Dogs currentDogs={currentDogs} loading={loading} />

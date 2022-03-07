@@ -2,7 +2,7 @@ const { Router } = require('express');
 const {Dog, Temperament} = require('../db.js');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-const {getApiTemperaments, getDogsAPI, getDogsDB, addTemperament, getDogByID} = require('./utils.js');
+const {getApiTemperaments, getDogsAPI, getDogsDB, addTemperament, getDogByID, fixWeight} = require('./utils.js');
 
 const router = Router();
 
@@ -57,6 +57,7 @@ router.get('/dogs', async (req,res) =>{
                 console.log(dog.name)
                 return ({
                     id: dog.id,
+                    weight: fixWeight(dog.weight.metric),
                     name: dog.name,
                     image: dog.image.url,
                     temperament: Array.isArray(dog.temperament) ? dog.temperament.join(', ') : dog.temperament, 

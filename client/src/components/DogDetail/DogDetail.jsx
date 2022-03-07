@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getDogDetail, resetDogDetail } from '../../actions';
-
+import NavBar from "../NavBar/NavBar"
 const DogDetail = ({match}) => {
 
     const dispatch = useDispatch();
@@ -15,6 +15,7 @@ const DogDetail = ({match}) => {
 
     return (
         <div>
+            <NavBar />
             {
                 dog ?
                 <div>

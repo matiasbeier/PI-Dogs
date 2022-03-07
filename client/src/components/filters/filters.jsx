@@ -9,6 +9,7 @@ const Filters = () =>{
 
     function handleFilterTemperament(e){
         dispatch(filterByTemperament(e.target.value));
+
     }
 
     function handleFilterByApiOrDb(e){
@@ -17,12 +18,12 @@ const Filters = () =>{
 
     return (
         <div>
-            <select onClick={e =>handleFilterByApiOrDb(e)} >
+            <select onChange={e =>handleFilterByApiOrDb(e)} >
                 <option value="all">All</option>
                 <option value={false}>Existings</option>
                 <option value={true}>Created</option>
             </select>
-            <select onClick={e =>handleFilterTemperament(e)} >
+            <select onChange={e =>handleFilterTemperament(e)} >
                 <option value="all">All</option>
                 {
                     temperaments?.map(temp =>{

@@ -27,6 +27,7 @@ async function getDogsAPI(name){
             if(race.name.toLowerCase().includes(name.toLowerCase())){
                 return {
                     name: race.name,
+                    weight: race.weight,
                     image: race.image,
                     temperament: race.temperament,
                     created_by_me: false
@@ -60,6 +61,7 @@ async function getDogsDB(name){
                 return {
                     id: race.id,
                     name: race.name,
+                    weight: race.weight,
                     image: race.image,
                     temperament: race.temperaments.map(t => t.name).join(', '),
                     created_by_me: race.created_by_me
@@ -130,11 +132,20 @@ async function getDogByID(id){
     
 }
 
+function fixWeight(weight){
+    if(weight === "NaN") return "20 - 30";
+    const [minWeight, maxWeight] = weight.split(' - ');
+    if(minWeight === "NaN" || !minWeight) return `${maxWeight - 1} - ${maxWeight}`; 
+    if(maxWeight === "NaN" || !maxWeight) return `${minWeight} - ${minWeight + 1}`;
+    return weight;
+} 
+
 
 module.exports = {
     getApiTemperaments,
     getDogsAPI,
     getDogsDB,
     addTemperament,
-    getDogByID
+    getDogByID,
+    fixWeight
 }
