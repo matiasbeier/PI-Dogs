@@ -60,17 +60,15 @@ export const getTemperaments = () =>{
 }
 
 export const resetDogDetail = () =>{
-    return function(dispatch){
-        dispatch({type: 'RESET_DOG_DETAIL'})
-    }
+    return {type: 'RESET_DOG_DETAIL'}
 }
 
-export const orderAsc = () =>{
-    return {type: 'ORDER_ASC'}
+export const orderByName = (payload) =>{
+    return {type: 'ORDER_BY_NAME', payload}
 }
 
-export const orderDes = () =>{
-    return {type: 'ORDER_DES'}
+export const orderByWeight = (payload) =>{
+    return {type: 'ORDER_BY_WEIGHT', payload}
 }
 
 export const filterByTemperament = (temp) =>{
@@ -79,4 +77,8 @@ export const filterByTemperament = (temp) =>{
 
 export const filterByApiOrDb = (value) =>{
     return {type: 'FILTER_BY_API_OR_DB', payload: value}
+}
+
+export const resetAllDogs = () =>{
+    return {type: 'RESET_ALL_DOGS'}
 }

@@ -5,6 +5,7 @@ import Dogs from "../Dogs/Dogs";
 import NextPageBar from "../NextPageBar/NextPageBar"
 import SearchBar from "../SearchBar/SearchBar";
 
+
 const Home = () =>{
     let {dogsFiltered} = useSelector(state => state)
     const dispatch = useDispatch();
@@ -15,29 +16,26 @@ const Home = () =>{
 
     const numberLastDog = dogsPerPage * currentPage;
     const numberFirstDog = numberLastDog - dogsPerPage;
-    const currentDogs = dogsFiltered.slice(numberFirstDog, numberLastDog);
+    const currentDogs = dogsFiltered?.slice(numberFirstDog, numberLastDog);
 
     const paginate = (pageNumber => setCurrentPage(pageNumber))
 
 
     useEffect(() =>{
-        setLoading(true);
+        setLoading(true)
         dispatch(getAllDogs())
+        dispatch(getTemperaments())
+        .then(()=>dispatch(filterByTemperament("all")))        
         .then(()=>setLoading(false))
     }, [dispatch]);
 
-    useEffect(() =>{
-        dispatch(getTemperaments())
-        .then(()=>dispatch(filterByTemperament("all")))
-        
-    }, [dispatch])
 
     return (
         <div>
             <SearchBar />
-            <NextPageBar postPerPage={dogsPerPage} totalPost={dogsFiltered.length} paginate={paginate} />
+            <NextPageBar postPerPage={dogsPerPage} totalPost={dogsFiltered?.length} paginate={paginate} />
             <Dogs currentDogs={currentDogs} loading={loading} />
-            <NextPageBar postPerPage={dogsPerPage} totalPost={dogsFiltered.length} paginate={paginate} />
+            <NextPageBar postPerPage={dogsPerPage} totalPost={dogsFiltered?.length} paginate={paginate} />
             <h3>
                 Created by <a href="https://www.linkedin.com/in/matias-beier-136118225/">Matias Beier 😎</a> 
             </h3>

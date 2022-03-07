@@ -120,6 +120,5 @@ const CreateDog = () => {
         </form>
     )
 }
-//hacer los temperament
 // cuando haga el css, me creo una clase para poner el input rojo 
 export default CreateDog;

@@ -1,4 +1,5 @@
 import React from 'react';
+import s from './NextPageBar.module.css'
 
 const NextPageBar = ({postPerPage, totalPost, paginate}) =>{
     const totalPage = [];
@@ -8,19 +9,19 @@ const NextPageBar = ({postPerPage, totalPost, paginate}) =>{
     }
     return (
         <nav>
-            <ul>
+            <ol className={s.ol}>
                 {
                     totalPage?.map(number =>{
                         return (
                             <li key={number}>
-                                <a onClick={() => paginate(number)} >
+                                <a onClick={() => paginate(number)} href='#!' >
                                     {number}
                                 </a>
                             </li>
                         )
                     })
                 }
-            </ul>
+            </ol>
         </nav>
     )
 }

@@ -1,15 +1,20 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
 
 
 const NavBar = () =>{
+
+    function handleRefresh(e){
+    }
+
     return (
         <div>
             <Link to='/home'>
-                Home
+                <button onClick={e => handleRefresh(e)}>Home</button>
             </Link>
             <Link to='/home/dog/create'>
-                Create
+                <button>Create</button>
             </Link>
         </div>
     )

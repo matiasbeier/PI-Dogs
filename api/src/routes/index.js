@@ -29,11 +29,11 @@ router.post('/dogs', async (req,res) =>{
         const life_span = life_span_min + " - " + life_span_max;
         try{
             let dog = await Dog.create({
-                    name,
+                    name: name[0].toUpperCase().concat(name.slice(1)),
                     height,
                     weight,
                     life_span,
-                    origin,
+                    origin: origin[0].toUpperCase().concat(origin.slice(1)),
                     image: {url: image},
             })
             const newDog = await addTemperament(temperament, dog);
@@ -49,13 +49,12 @@ router.post('/dogs', async (req,res) =>{
 
 router.get('/dogs', async (req,res) =>{
     let {name} = req.query;
-        name = name?.toLowerCase();
+    console.log(name)
         const [dogsAPI, dogsDB ] = await Promise.all([getDogsAPI(name), getDogsDB(name)])
         if(dogsAPI || dogsDB){
-            console.log(dogsDB)
             let total = dogsAPI.concat(dogsDB);
             total = total.map(dog => {
-                console.log(dog)
+                console.log(dog.name)
                 return ({
                     id: dog.id,
                     name: dog.name,

@@ -11,6 +11,12 @@ function reducer(state = initialState, action){
         case 'GET_ALL_DOGS':
             return {
                 ...state,
+                dogs: action.payload,
+                dogsFiltered: action.payload
+            }
+        case 'GET_DOGS_BY_NAME':
+            return {
+                state,
                 dogs: action.payload
             }
 
@@ -36,21 +42,32 @@ function reducer(state = initialState, action){
                 ...state,
                 dog: {}
             }
-        case 'ORDER_ASC':
+        case 'ORDER_BY_NAME':
+            const dogsOrdered = action.payload === "asc" 
+                    ? state.dogs.sort(function(a, b){
+                        if(a.name > b.name) return 1;
+                        if(a.name < b.name) return -1;
+                        return 0;
+                    })
+                    : state.dogs.sort(function(a, b) {
+                        if(a.name < b.name) return 1; 
+                        if(a.name > b.name) return -1;
+                        return 0;
+                    })  
             return {
                 ...state,
-                dogs: state.dogs.sort()
+                dogsFiltered: dogsOrdered
             }
-        case 'ORDER_DES':
+        case 'ORDER_BY_WEIGHT':
+
             return {
                 ...state,
-                dogs: state.dogs.reverse()
+                dogsFiltered: action.payload === "ligth" ? state.dogs : state.dogs.reverse() 
             }
         case 'FILTER_BY_TEMPERAMENT':
-            state.dogsFiltered = state.dogs
             let dogsFilter = action.payload === "all"
-                ? state.dogsFiltered
-                : state.dogsFiltered.filter(dog =>{
+                ? state.dogs
+                : state.dogs?.filter(dog =>{
                     const ArrayOfTemperaments = dog.temperament?.split(', ')
                     if(ArrayOfTemperaments?.includes(action.payload)){
                        return true
@@ -61,16 +78,20 @@ function reducer(state = initialState, action){
                 ...state,
                 dogsFiltered: dogsFilter
             }
-/*         case 'FILTER_BY_API_OR_DB':
-            console.log(state.dogs)
-            dogsFilter = action.payload === "all"
-                ? dogsFilter
-                : state.dogs.filter(dog => {
-                })
+        case 'FILTER_BY_API_OR_DB':
+            let dogsCreated = action.payload === "all"
+                ? state.dogs
+                : state.dogs.filter(dog =>dog.created_by_me.toString() === action.payload)
             return {
                 ...state,
-                dogs: dogsFilter
-            } */
+                dogsFiltered: dogsCreated
+            }
+        case 'RESET_ALL_DOGS':
+            return {
+                ...state,
+                dogs: [],
+                dogsFiltered: []
+            }
 
         default:
             return state;

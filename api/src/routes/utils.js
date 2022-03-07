@@ -18,14 +18,13 @@ async function getApiTemperaments () {
     return temperaments
 }
 
-
 //podria retornar solo los datos que voy a utilizar para optimizar
 async function getDogsAPI(name){
     let {data} = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
     if(name) {
         let dogs = [];
         dogs = data.filter( race => {
-            if(race.name.toLowerCase().includes(name)){
+            if(race.name.toLowerCase().includes(name.toLowerCase())){
                 return {
                     name: race.name,
                     image: race.image,
@@ -35,8 +34,9 @@ async function getDogsAPI(name){
             }
             });
         return dogs
+    } else{
+        return data;
     }
-    return data;
 }
 
 async function getDogsDB(name){
@@ -58,10 +58,11 @@ async function getDogsDB(name){
         if(races){
             return races.map( race => {
                 return {
-                name: race.name,
-                image: race.image,
-                temperament: race.temperaments.map(t => t.name),
-                created_by_me: race.created_by_me
+                    id: race.id,
+                    name: race.name,
+                    image: race.image,
+                    temperament: race.temperaments.map(t => t.name).join(', '),
+                    created_by_me: race.created_by_me
                 }
             });
         } else {
@@ -79,19 +80,19 @@ async function getDogsDB(name){
         })
         return races.map( race => {
             return {
-            id: race.id,
-            name: race.name,
-            image: race.image,
-            temperament: race.temperaments.map(t => t.name),
-            created_by_me: race.created_by_me,
-            height: race.height,
-            weight: race.weight,
-            life_span: race.life_span,
-            origin: race.origin
-        }});
+                id: race.id,
+                name: race.name,
+                image: race.image,
+                temperament: race.temperaments.map(t => t.name).join(', '),
+                created_by_me: race.created_by_me,
+                height: race.height,
+                weight: race.weight,
+                life_span: race.life_span,
+                origin: race.origin
+            }
+        });
     }
 }
-
 
 
 async function addTemperament(temperament, dog){

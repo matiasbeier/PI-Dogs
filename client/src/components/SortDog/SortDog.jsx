@@ -1,24 +1,26 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { orderAsc, orderDes } from '../../actions';
+import { orderByName, orderByWeight } from '../../actions';
 
 const SortDog = () =>{
 
     const dispatch = useDispatch();
     
-    function handleSort(e){
-        e.target.value === "asc"
-            ? dispatch(orderAsc())
-            : dispatch(orderDes())
+    function handleSortByName(e){
+        dispatch(orderByName(e.target.value))
+    }
+
+    function handleSortByWeigth(e){
+        dispatch(orderByWeight(e.target.value))
     }
 
     return (
         <div>
-            <select name="" id="">
-                <option value="asc" onClick={e => handleSort(e)}>a-z</option>
-                <option value="desc" onClick={e => handleSort(e)}>z-a</option>
+            <select onClick={e => handleSortByName(e)} >
+                <option value="asc" >a-z</option>
+                <option value="desc" >z-a</option>
             </select>
-            <select name="" id="">
+            <select onClick={e => handleSortByWeigth(e)}>
                 <option value="ligth">ligthweight</option>
                 <option value="heavy">heavyweight</option>
             </select>

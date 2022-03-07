@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterByTemperament } from '../../actions';
+import { filterByTemperament, filterByApiOrDb } from '../../actions';
 
 const Filters = () =>{
 
@@ -11,16 +11,16 @@ const Filters = () =>{
         dispatch(filterByTemperament(e.target.value));
     }
 
-/*     function handleFilterByApiOrDb(e){
+    function handleFilterByApiOrDb(e){
         dispatch(filterByApiOrDb(e.target.value));
-    } */
+    }
 
     return (
         <div>
-            <select >
+            <select onClick={e =>handleFilterByApiOrDb(e)} >
                 <option value="all">All</option>
-                <option value="api">Existings</option>
-                <option value="created">Created</option>
+                <option value={false}>Existings</option>
+                <option value={true}>Created</option>
             </select>
             <select onClick={e =>handleFilterTemperament(e)} >
                 <option value="all">All</option>
