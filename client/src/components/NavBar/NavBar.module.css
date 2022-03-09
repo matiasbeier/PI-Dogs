@@ -1,7 +1,44 @@
-.container{
-    font-size: 2rem;
+.btn1{
+    margin-top: 1rem;
+    position: relative;
+    font-size: 2.5rem;
+    margin-left: -75rem;
+    background-color: transparent;
+    border-radius: 0.5rem;
+    padding: .5rem;
+    cursor: pointer;
+}
+.btn2{
+    border-radius: 0.5rem;
+    background-color: transparent;
+    margin-top: 1rem;
+    position: absolute;
+    font-size: 2.5rem;
+    margin-left: 66rem;
+    padding: .5rem;
+}
+.container2{
+    position: relative;
+    margin-right: 70rem;
+    margin-bottom: -6.5rem;
+    background-color: grey;
+    opacity: .2;
+    padding-bottom: 7rem;
+    margin-top: -0.5rem;
 }
 
-.btn{
-    font-size: 2rem;
+.container3{
+    margin-left: 70rem;
+    margin-bottom: -6.5rem;
+    background-color: grey;
+    opacity: .2;
+    padding-bottom: 6.5rem;
+
 }
+
+.container{
+    margin-bottom: -6.5rem;
+    background-color: grey;
+    opacity: .2;
+    padding-bottom: 7rem;
+} 

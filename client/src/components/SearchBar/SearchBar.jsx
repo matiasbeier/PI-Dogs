@@ -4,6 +4,8 @@ import Filters from '../Filters/Filters';
 import SortDog from '../SortDog/SortDog';
 import { getDogsByName, getTemperaments, filterByTemperament } from '../../actions';
 import { useDispatch } from 'react-redux';
+import s from './SearchBar.module.css'
+import {BiSearchAlt2} from 'react-icons/bi'
 
 const SearchBar = () =>{
     const [name, setName] = useState("");
@@ -22,10 +24,10 @@ const SearchBar = () =>{
     }
 
     return (
-        <div>
+        <div className={s.search}>
             <form onSubmit={e=> handleSubmit(e)}>
-                <input type="text" placeholder='search dog' onChange={e=> handleChange(e)} value={name} name="name"/>
-                <button type='submit'>🔍</button>
+                <input className={s.inputStyle} type="text" placeholder='search dog' onChange={e=> handleChange(e)} value={name} name="name"/>
+                <button className={s.btn} type='submit'><BiSearchAlt2 className={s.icon}/></button>
             </form>
             <Filters />
             <SortDog />

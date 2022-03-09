@@ -6,6 +6,7 @@ import NextPageBar from "../NextPageBar/NextPageBar"
 import SearchBar from "../SearchBar/SearchBar";
 import NavBar from "../NavBar/NavBar"
 import s from './Home.module.css'
+import Loading from "../Loading/Loading";
 
 const Home = () =>{
     let {dogsFiltered} = useSelector(state => state)
@@ -31,15 +32,23 @@ const Home = () =>{
     }, [dispatch]);
 
     return (
-        <div className={s.home}>
-            <NavBar />
-            <SearchBar />
-            <NextPageBar postPerPage={dogsPerPage} totalPost={dogsFiltered?.length} paginate={paginate} />
-            <Dogs currentDogs={currentDogs} loading={loading} />
-            <NextPageBar postPerPage={dogsPerPage} totalPost={dogsFiltered?.length} paginate={paginate} />
-            <h3>
-                Created by <a href="https://www.linkedin.com/in/matias-beier-136118225/">Matias Beier 😎</a> 
-            </h3>
+        <div className={s.background}>
+        {
+        loading
+        ? <Loading/>
+        : (
+            <div className={s.gradient} >
+                <NavBar />
+                <SearchBar />
+                <NextPageBar postPerPage={dogsPerPage} totalPost={dogsFiltered?.length} paginate={paginate} />
+                <Dogs currentDogs={currentDogs} loading={loading} />
+                <NextPageBar postPerPage={dogsPerPage} totalPost={dogsFiltered?.length} paginate={paginate} />
+                <h3>
+                    Created by <a href="https://www.linkedin.com/in/matias-beier-136118225/">Matias Beier 😎</a> 
+                </h3>
+            </div>
+        )
+        }
         </div>
     )
 }

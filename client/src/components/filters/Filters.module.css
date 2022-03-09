@@ -1,0 +1,17 @@
+.selectStyle{
+    font-size: 1.25rem;
+    border-radius: .5rem;
+    background-color: transparent;
+    margin-left: .5rem;
+}
+.selectStyle:focus{
+    background-color: rgb(88, 86, 86);
+    color: aliceblue;
+}
+.container{
+    width: 100%;
+    max-width: fit-content;
+    margin-left: 25rem;
+    margin-top: 1rem;
+    justify-content: space-between;
+}

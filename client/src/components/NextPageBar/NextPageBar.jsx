@@ -14,7 +14,7 @@ const NextPageBar = ({postPerPage, totalPost, paginate}) =>{
                     totalPage?.map(number =>{
                         return (
                             <li key={number}>
-                                <a onClick={() => paginate(number)} href='#!' >
+                                <a onClick={() => paginate(number)} href='#!' className={s.numberStyle} >
                                     {number}
                                 </a>
                             </li>

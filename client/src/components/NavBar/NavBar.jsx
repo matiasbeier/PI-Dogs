@@ -16,20 +16,33 @@ const NavBar = () =>{
     }
 
     return (
-        <div className={s.container} >
+        <>
             {
                 location.pathname === '/home'
-                ? (<button onClick={e => handleRefresh(e)} className={s.btn}>Home</button>)
+                ? (
+                <>
+                    <div className={s.container2}></div>
+                    <div className={s.container3}></div>
+                    <button onClick={e => handleRefresh(e)} className={s.btn1}>Home</button>
+                </>
+                )
                 : (
-                    <Link to='/home'>
-                        <button className={s.btn}>Home</button>
-                    </Link>
+                    <>
+                        <div className={s.container}></div> 
+                        <Link to='/home'>
+                            <button className={s.btn1}>Home</button>
+                        </Link>
+                    </>
                 )
             }
-            <Link to='/home/dog/create'>
-                <button className={s.btn}>Create</button>
-            </Link>
-        </div>
+            {
+                location.pathname !== '/home/dog/create' &&
+                    <Link to='/home/dog/create'>
+                        <button className={s.btn2}>Create</button>
+                    </Link>
+            }
+
+        </>
     )
 }
 

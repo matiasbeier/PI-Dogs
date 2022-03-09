@@ -1,0 +1,40 @@
+.container{
+    margin-top: 3.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: aliceblue;
+}
+
+.inputStyle{
+    font-size: 1.5rem;
+    background-color: rgb(197, 193, 193);
+    border-radius: .5rem;
+}
+
+.inputNumberStyle{
+    font-size: 1.5rem;
+    width: 100%;
+    max-width: 10rem;
+    background-color: rgb(197, 193, 193);
+    border-radius: .5rem;
+}
+
+.btn{
+    cursor: no-drop;
+    font-size: 1.5rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: transparent;
+    font-weight: bold;
+}
+
+.selectStyle{
+    font-size: 1.25rem;
+    border-radius: .5rem;
+    background-color: rgb(197, 193, 193);
+    margin-left: 0.5rem;
+}
+.selectStyle:focus{
+    background-color: rgb(88, 86, 86);
+    color: aliceblue;
+}

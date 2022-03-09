@@ -13,7 +13,7 @@ const Dogs = ({currentDogs, loading}) =>{
                 currentDogs?.map(dog =>{
                     return (
                         <li key={dog.id} >
-                            <Link to ={`/home/dog/${dog.id}/detail`}  >
+                            <Link to ={`/home/dog/${dog.id}/detail`} className={s.deleteUnderlined} >
                                 <Dog 
                                 key={dog.id}
                                 image={dog.image}

@@ -4,5 +4,10 @@
     gap: 4rem;
     font-size: .8rem;
     list-style: none;
-    
+
+}
+
+.deleteUnderlined {
+    text-decoration: none;
+    color:aliceblue;
 }

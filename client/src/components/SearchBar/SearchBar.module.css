@@ -1,0 +1,29 @@
+.search{
+    margin-top: -4rem;
+    
+}
+
+.inputStyle {
+    font-size: 2.5rem;
+    background-color: transparent;
+    border-radius: 1rem;
+    padding-left: .5rem;
+    padding-right: 3.5rem;
+}
+.inputStyle:focus{
+    /* background-color: rgb(94, 93, 93); */
+    /* color: rgb(26, 24, 24); */
+    background-color: rgb(172, 169, 169);
+    opacity: .25;
+    color:black
+}
+.btn{
+    font-size: 2rem;
+    background-color: transparent;
+    border-radius: 2rem;
+    border: none;
+    margin-left: -3.5rem;
+}
+.icon{
+    margin-bottom: -.1rem;
+}

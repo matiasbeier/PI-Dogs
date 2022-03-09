@@ -28,7 +28,7 @@ export default function validate(input, temperaments){
         error.life_span = "the parameter left should be smaller than rigth"
     }
 
-    if(!/[aA-zZ\s]{1}$/.test(input.origin)) {
+    if(!/[aA-zZ\s]{1}$/.test(input.origin) && input.origin !== "") {
         error.origin = "origin is invalid"
     }
 

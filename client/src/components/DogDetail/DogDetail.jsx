@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getDogDetail, resetDogDetail } from '../../actions';
 import NavBar from "../NavBar/NavBar"
+import h from '../Home/Home.module.css'
+
 const DogDetail = ({match}) => {
 
     const dispatch = useDispatch();
@@ -14,7 +16,7 @@ const DogDetail = ({match}) => {
     }, [dispatch, match.params.id])
 
     return (
-        <div>
+        <div className={h.background}>
             <NavBar />
             {
                 dog ?
