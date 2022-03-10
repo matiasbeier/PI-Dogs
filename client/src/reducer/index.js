@@ -3,7 +3,8 @@ const initialState = {
     dog: {},
     temperaments: [],
     dogsFiltered: [],
-    dogsFilteredAux: []
+    dogsFilteredAux: [],
+    loading: false
 }
 
 
@@ -25,7 +26,7 @@ function reducer(state = initialState, action){
         case 'CREATE_DOG':
             return {
                 ...state,
-                dogs: [...state.dogs, action.payload]
+                dogs: [...state.dogs, action.payload],
             }
 
         case 'GET_TEMPERAMENTS':
@@ -119,6 +120,11 @@ function reducer(state = initialState, action){
                 ...state,
                 dogs: [],
                 dogsFiltered: []
+            }
+        case 'SEARCH_BY_NAME_LOADING':
+            return {
+                ...state,
+                loading: action.payload
             }
 
         default:

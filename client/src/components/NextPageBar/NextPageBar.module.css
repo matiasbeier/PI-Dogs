@@ -8,6 +8,8 @@
     justify-content: center;
 }
 .numberStyle{
+    width: 100%;
+    max-width: 5rem;
     text-decoration: none;
     background-color: rgb(88, 86, 86);
     opacity: .9;

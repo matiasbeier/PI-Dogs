@@ -4,13 +4,11 @@
     font-weight: bold;
     color: aliceblue;
 }
-
 .inputStyle{
     font-size: 1.5rem;
     background-color: rgb(197, 193, 193);
     border-radius: .5rem;
 }
-
 .inputNumberStyle{
     font-size: 1.5rem;
     width: 100%;
@@ -18,16 +16,19 @@
     background-color: rgb(197, 193, 193);
     border-radius: .5rem;
 }
-
 .btn{
-    cursor: no-drop;
     font-size: 1.5rem;
     padding: 1rem;
     border-radius: 1rem;
-    background-color: transparent;
+    background-color: rgb(224, 218, 218);
     font-weight: bold;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: .25s;
 }
-
+.btn:hover{
+    background-color: transparent;
+}
 .selectStyle{
     font-size: 1.25rem;
     border-radius: .5rem;
@@ -37,4 +38,32 @@
 .selectStyle:focus{
     background-color: rgb(88, 86, 86);
     color: aliceblue;
+}
+.errorStyle{
+    font-size: 1.5rem;
+    background-color: rgb(197, 193, 193);
+    border-radius: .5rem;
+    border-color: red;
+}
+.errorNumberStyle{
+    font-size: 1.5rem;
+    width: 100%;
+    max-width: 10rem;
+    background-color: rgb(197, 193, 193);
+    border-radius: .5rem;
+    border-color: rgb(216, 17, 17);
+}
+.errorBtn{
+    cursor: no-drop;
+    font-size: 1.5rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: transparent;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+.imgStyle{
+    width: 10rem;
+    height: 10rem;
+
 }

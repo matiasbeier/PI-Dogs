@@ -7,6 +7,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import NavBar from "../NavBar/NavBar"
 import s from './Home.module.css'
 import Loading from "../Loading/Loading";
+import image from './LOGO-HENRY-04_w.png'
 
 const Home = () =>{
     let {dogsFiltered} = useSelector(state => state)
@@ -41,10 +42,12 @@ const Home = () =>{
                 <NavBar />
                 <SearchBar />
                 <NextPageBar postPerPage={dogsPerPage} totalPost={dogsFiltered?.length} paginate={paginate} />
-                <Dogs currentDogs={currentDogs} loading={loading} />
+                <Dogs currentDogs={currentDogs} />
                 <NextPageBar postPerPage={dogsPerPage} totalPost={dogsFiltered?.length} paginate={paginate} />
-                <h3>
-                    Created by <a href="https://www.linkedin.com/in/matias-beier-136118225/">Matias Beier 😎</a> 
+                <h3 className={s.footer} >
+                    Created by <a className={s.footer} href="https://www.linkedin.com/in/matias-beier-136118225/">Matias Beier </a>
+                    to 
+                    <img src={image} alt="henry" className={s.icon}/> 
                 </h3>
             </div>
         )

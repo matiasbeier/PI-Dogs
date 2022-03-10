@@ -9,7 +9,6 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-
 router.post('/dogs', async (req,res) =>{
     const {name, 
         height_min, 
@@ -22,22 +21,25 @@ router.post('/dogs', async (req,res) =>{
         temperament, 
         image
     } = req.body.newDog;
-
     if(name && height_min && height_max && weight_min && weight_max) {
         const height = {metric: height_min + " - " + height_max};
         const weight = {metric: weight_min + " - " + weight_max};
-        const life_span = life_span_min + " - " + life_span_max;
+        let life_span = ""
+        if(life_span_min && life_span_max){
+            life_span = life_span_min + " - " + life_span_max + " years";
+        } else if(life_span_min || life_span_max) {
+            life_span = (life_span_min ? life_span_min : life_span_max) + " years";
+        }
         try{
             let dog = await Dog.create({
                     name: name[0].toUpperCase().concat(name.slice(1)),
                     height,
                     weight,
-                    life_span,
-                    origin: origin[0].toUpperCase().concat(origin.slice(1)),
+                    life_span: life_span ? life_span : null,
+                    origin: origin ? origin[0].toUpperCase().concat(origin.slice(1)) : null,
                     image: {url: image},
             })
             const newDog = await addTemperament(temperament, dog);
-            console.log(newDog)
             return res.send(newDog);
         } catch(e){
             return res.send(e);
@@ -49,12 +51,10 @@ router.post('/dogs', async (req,res) =>{
 
 router.get('/dogs', async (req,res) =>{
     let {name} = req.query;
-    console.log(name)
         const [dogsAPI, dogsDB ] = await Promise.all([getDogsAPI(name), getDogsDB(name)])
         if(dogsAPI || dogsDB){
             let total = dogsAPI.concat(dogsDB);
             total = total.map(dog => {
-                console.log(dog.name)
                 return ({
                     id: dog.id,
                     weight: fixWeight(dog.weight.metric),
@@ -79,7 +79,6 @@ router.get('/dogs/:id', async (req,res) =>{
             return res.send(dog);
         }
         return res.status(404).send(dog)
-        
     }catch(e){
         res.send(e)
     }

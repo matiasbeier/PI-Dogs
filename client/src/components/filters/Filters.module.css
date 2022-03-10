@@ -3,8 +3,10 @@
     border-radius: .5rem;
     background-color: transparent;
     margin-left: .5rem;
+    color: rgb(211, 221, 230);
+    transition: 0.25s;
 }
-.selectStyle:focus{
+.selectStyle:hover{
     background-color: rgb(88, 86, 86);
     color: aliceblue;
 }

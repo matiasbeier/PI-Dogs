@@ -42,6 +42,7 @@ async function getDogsAPI(name){
 
 async function getDogsDB(name){
     if(name) {
+        name = name[0].toUpperCase() + name.slice(1)
         const races = await Dog.findAll({
             where: {
                 name: {
@@ -98,7 +99,7 @@ async function getDogsDB(name){
 
 
 async function addTemperament(temperament, dog){
-    if(temperament){
+    if(temperament.length){
         if(typeof(temperament) === "string") temperament = temperament.split(',');
         const t = await Temperament.findAll({
             where: {

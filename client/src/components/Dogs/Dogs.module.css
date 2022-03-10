@@ -11,3 +11,17 @@
     text-decoration: none;
     color:aliceblue;
 }
+.dogNotFound{
+    width: 100%;
+}
+.title{
+    color:rgb(233, 227, 227);
+    margin-top: -5rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 2rem;
+}
+.image{
+    height: 25rem;
+    width: 20rem;
+}

@@ -14,23 +14,10 @@ export const getDogsByName = (name) =>{
         .then(({data}) => {
             dispatch({type: 'GET_DOGS_BY_NAME', payload: data})
         })
+        .catch((e) => console.log(e))
     }
 }
-/* export const getDogsByName = (name) =>{
-    return function(dispatch) {
-        if(name){
-            return axios.get(`http://localhost:3001/dogs?name=${name}`)
-            .then(({data}) => {
-                dispatch({type: 'GET_DOGS', payload: data})
-            })            
-        } else{
-            return axios.get('http://localhost:3001/dogs')
-            .then(({data}) => {
-                dispatch({type: 'GET_DOGS', payload: data})
-            })           
-        }
-    }
-} */
+
 export const getDogDetail = (id) =>{
     return function(dispatch){
         return axios.get('http://localhost:3001/dogs/' + id)
@@ -46,6 +33,7 @@ export const createDog = (newDog) =>{
         .then(({data}) =>{
             dispatch({type: 'CREATE_DOG', payload: data})
         })
+        .then(() => alert("Dog succesfully created!!!"))
         .catch(e => console.log(e))
     }
 }
@@ -79,6 +67,6 @@ export const filterByApiOrDb = (value) =>{
     return {type: 'FILTER_BY_API_OR_DB', payload: value}
 }
 
-export const resetAllDogs = () =>{
-    return {type: 'RESET_ALL_DOGS'}
+export const searchByNameLoading = (payload) =>{
+    return {type: 'SEARCH_BY_NAME_LOADING', payload}
 }
