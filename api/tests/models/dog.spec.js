@@ -17,6 +17,33 @@ describe('Dog model', () => {
       it('should work when its a valid name', () => {
         Dog.create({ name: 'Pug' });
       });
+      it('should throw an error if height is null', (done) =>{
+        Dog.create({
+          name: "Matias",
+          weight: {metric: '23 - 29'},
+        })
+          .then(() => done(new Error('height is require')))
+          .catch(() => done());        
+      })
+      it('should throw an error if weight is null', (done) =>{
+        Dog.create({
+          name: "Matias",
+          height: {metric: '40 - 52'},
+        })
+          .then(() => done(new Error('weight is require')))
+          .catch(() => done());        
+      })
+      it('should throw an error if created_by_me is not el boolean', (done) =>{
+        Dog.create({
+          name: "Matias",
+          height: {metric: '40 - 52'},
+          weight: {metric: '23 - 29'},
+          created_by_me: "hola mundo"
+        })
+          .then(() => done(new Error('created_by_me is invalid')))
+          .catch(() => done());
+      })
+
     });
   });
 });

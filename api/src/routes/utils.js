@@ -36,7 +36,7 @@ async function getDogsAPI(name){
             });
         return dogs
     } else{
-        return data;
+        return data
     }
 }
 
@@ -123,7 +123,6 @@ async function getDogByID(id){
     if(dog) return dog;
 
     const dogAPI = await getDogsAPI();
-    console.log(dogAPI)
     const doggy = dogAPI.find(d => Number(d.id) === Number(id));
     if(doggy) {
         return doggy;
