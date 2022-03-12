@@ -43,8 +43,8 @@ export default function validate({
         error.origin = "origin is invalid"
     }
 
-    if(!/^[aA-zZ\s]*$/.test(temperament)){
-        error.temperament = "shouldn't have numbers"
+    if(!/^[aA-zZ\s+,-]*$/.test(temperament)){
+        error.temperament = "temperament is invalid"
     } else if(typeof(temperament) === "string" && temperament !== ""){
         const tempToArray = temperament.split(',')
         for (let i = 0; i < tempToArray.length; i++) {

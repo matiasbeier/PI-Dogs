@@ -21,3 +21,13 @@
     background-color: rgb(129, 123, 114);;
     color: rgb(192, 195, 197);
 }
+.currentNumber{
+    width: 100%;
+    max-width: 5rem;
+    text-decoration: none;
+    background-color: aliceblue;
+    opacity: .9;
+    padding: .25rem .5rem .25rem .5rem;
+    color: rgb(88, 86, 86);
+    transition: .25s;
+}

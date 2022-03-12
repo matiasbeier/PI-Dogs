@@ -52,10 +52,8 @@ const CreateDog = () => {
         if (Array.isArray(input.temperament)){
             if(input.temperament.includes("")){
                 setInput({...input, temperament: [...input.temperament.filter(t=> t !== ""), e.target.value]})
-                /* e.target.value = false */
             } else {
                 setInput({...input, temperament: [...input.temperament, e.target.value]})
-                /* e.target.value = false */
             }
         }
         if(typeof(input.temperament) === "string" && input.temperament !== ""){
@@ -80,28 +78,25 @@ const CreateDog = () => {
                 <br />
                 <>
                     <label htmlFor="minHeight">Height: </label>
-                    <input maxLength={4} type="text" id='minHeight' placeholder='min...' value={input.height_min} onChange={e=>handleChange(e)} name='height_min' className={error.height ? s.errorNumberStyle : s.inputNumberStyle}/>
+                    <input maxLength={4} type="text" id='minHeight' placeholder='min cm...' value={input.height_min} onChange={e=>handleChange(e)} name='height_min' className={error.height ? s.errorNumberStyle : s.inputNumberStyle}/>
                     <label > - </label>
-                    <input maxLength={4} type="text"  placeholder='max...' value={input.height_max} onChange={e=>handleChange(e)} name='height_max' className={error.height ? s.errorNumberStyle : s.inputNumberStyle}/>
-                    <label >cm </label>
+                    <input maxLength={4} type="text"  placeholder='max cm...' value={input.height_max} onChange={e=>handleChange(e)} name='height_max' className={error.height ? s.errorNumberStyle : s.inputNumberStyle}/>
                 </>
                 {error.height && (<span>{error.height}</span>)}
                 <br />
                 <>
                     <label htmlFor="weight">Weight: </label>
-                    <input maxLength={4} type="text" id='weight' placeholder='min...' value={input.weight_min} onChange={e=>handleChange(e)} name='weight_min' className={error.weight ? s.errorNumberStyle : s.inputNumberStyle}/>
+                    <input maxLength={4} type="text" id='weight' placeholder='min kg...' value={input.weight_min} onChange={e=>handleChange(e)} name='weight_min' className={error.weight ? s.errorNumberStyle : s.inputNumberStyle}/>
                     <label > - </label>
-                    <input maxLength={4} type="text" placeholder='max...' value={input.weight_max} onChange={e=>handleChange(e)} name='weight_max' className={error.weight ? s.errorNumberStyle : s.inputNumberStyle}/>
-                    <label >kg </label>
+                    <input maxLength={4} type="text" placeholder='max kg...' value={input.weight_max} onChange={e=>handleChange(e)} name='weight_max' className={error.weight ? s.errorNumberStyle : s.inputNumberStyle}/>
                 </>
                 {error.weight && (<span>{error.weight}</span>)}
                 <br />
                 <>
                     <label htmlFor="life">Life-span: </label>
-                    <input maxLength={3} type="text" id='life' placeholder='min...' value={input.life_span_min} onChange={e=>handleChange(e)} name='life_span_min' className={error.life_span ? s.errorNumberStyle : s.inputNumberStyle}/>
+                    <input maxLength={3} type="text" id='life' placeholder='min years...' value={input.life_span_min} onChange={e=>handleChange(e)} name='life_span_min' className={error.life_span ? s.errorNumberStyle : s.inputNumberStyle}/>
                     <label > - </label>
-                    <input maxLength={3} type="text" placeholder='max...' value={input.life_span_max} onChange={e=>handleChange(e)} name='life_span_max' className={error.life_span ? s.errorNumberStyle : s.inputNumberStyle}/>
-                    <label >years </label>
+                    <input maxLength={3} type="text" placeholder='max years...' value={input.life_span_max} onChange={e=>handleChange(e)} name='life_span_max' className={error.life_span ? s.errorNumberStyle : s.inputNumberStyle}/>
                 </>
                 {error.life_span && (<span>{error.life_span}</span>)}
                 <br />

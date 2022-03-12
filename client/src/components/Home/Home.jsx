@@ -41,9 +41,9 @@ const Home = () =>{
             <div className={s.gradient} >
                 <NavBar />
                 <SearchBar />
-                <NextPageBar postPerPage={dogsPerPage} totalPost={dogsFiltered?.length} paginate={paginate} />
+                <NextPageBar postPerPage={dogsPerPage} totalPost={dogsFiltered?.length} paginate={paginate} currentPage={currentPage}/>
                 <Dogs currentDogs={currentDogs} />
-                <NextPageBar postPerPage={dogsPerPage} totalPost={dogsFiltered?.length} paginate={paginate} />
+                <NextPageBar postPerPage={dogsPerPage} totalPost={dogsFiltered?.length} paginate={paginate} currentPage={currentPage}/>
                 <h3 className={s.footer} >
                     Created by <a className={s.footer} href="https://www.linkedin.com/in/matias-beier-136118225/">Matias Beier </a>
                     to 
