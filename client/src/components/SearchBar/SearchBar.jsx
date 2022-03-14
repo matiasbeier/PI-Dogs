@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import Filters from '../Filters/Filters';
+import Filters from '../Filters/Filters.jsx';
 import SortDog from '../SortDog/SortDog';
 import { getDogsByName, getTemperaments, filterByTemperament, searchByNameLoading } from '../../actions';
 import { useDispatch } from 'react-redux';
