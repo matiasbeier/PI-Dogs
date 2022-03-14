@@ -62,7 +62,6 @@ function reducer(state = initialState, action){
                 dogsFiltered: dogsOrderedByName
             }
         case 'ORDER_BY_WEIGHT':
-            console.log(state.dogs)
             let dogsOrderByWeight = action.payload === "ligth" 
             ? state.dogsFiltered.sort(function(a, b){
                 let [aMinWeight, aMaxWeight] = a.weight.split(' - ');
@@ -107,7 +106,6 @@ function reducer(state = initialState, action){
                 dogsFilteredAux: dogsFilter,
             }
         case 'FILTER_BY_API_OR_DB':
-            console.log(state.dogsFiltered)
             let dogsCreated = action.payload === "all"
                 ? state.dogsFilteredAux
                 : state.dogsFilteredAux.filter(dog =>dog.created_by_me.toString() === action.payload)

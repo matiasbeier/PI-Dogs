@@ -7,7 +7,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import NavBar from "../NavBar/NavBar"
 import s from './Home.module.css'
 import Loading from "../Loading/Loading";
-import image from './LOGO-HENRY-04_w.png'
+import image from './img/LOGO-HENRY-04_w.png'
 
 const Home = () =>{
     let {dogsFiltered} = useSelector(state => state)
