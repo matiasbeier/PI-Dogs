@@ -6,6 +6,7 @@ export const getAllDogs = () =>{
         .then(({data}) => {
             dispatch({type: 'GET_ALL_DOGS', payload: data})
         })
+        .catch((e) => console.log(e))
     }
 }
 export const getDogsByName = (name) =>{
@@ -24,6 +25,7 @@ export const getDogDetail = (id) =>{
         .then(({data}) =>{
             dispatch({type: 'GET_DOG_DETAIL', payload: data})
         })
+        .catch((e) => console.log(e))
     }
 }
 
@@ -44,6 +46,7 @@ export const getTemperaments = () =>{
         .then(({data}) => {
             dispatch({type: 'GET_TEMPERAMENTS', payload: data})
         })
+        .catch((e) => console.log(e))
     }
 }
 
