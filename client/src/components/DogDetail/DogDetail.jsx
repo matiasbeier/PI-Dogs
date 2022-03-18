@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { getDogDetail, resetDogDetail } from '../../actions';
+import { getDogDetail, resetDogDetail, modifyDog } from '../../actions';
 import NavBar from "../NavBar/NavBar"
 import h from '../Home/Home.module.css'
 import s from './DogDetail.module.css'
+import { Link } from 'react-router-dom';
 
 const DogDetail = ({match}) => {
 
@@ -15,6 +16,7 @@ const DogDetail = ({match}) => {
         dispatch(getDogDetail(match.params.id))
         return dispatch(resetDogDetail())
     }, [dispatch, match.params.id])
+
 
     return (
         <div className={h.background}>
@@ -31,8 +33,14 @@ const DogDetail = ({match}) => {
                         <h3>{dog.life_span}</h3>
                         <h3>{dog.origin}</h3>
                     </div>
+                    {
+                        dog.created_by_me === true &&
+                        <Link to={`/home/dog/edit/${dog.id}`}>
+                        <button className={s.btn}>edit</button> 
+                        </Link>
+                    }
                 </div>)
-                : <h1>dog not found</h1> // mejorar
+                : <h1>dog not found</h1> 
             }
         </div>
     )

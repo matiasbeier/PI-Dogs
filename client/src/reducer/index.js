@@ -124,6 +124,22 @@ function reducer(state = initialState, action){
                 ...state,
                 loading: action.payload
             }
+        case 'DELETE_DOG':
+        const array = state.dogs.filter(dog => dog.id !== action.payload)
+        const array2 = state.dogsFilteredAux.filter(dog => dog.id !== action.payload)
+        return {
+            ...state,
+            dogs: array,
+            dogsFiltered: array,
+            dogsFilteredAux: array2
+        }
+        case 'MODIFY_DOG':
+        const arr = state.dogs.filter(dog => dog.id !== action.payload)
+        return {
+            ...state,
+            dogs: [...arr, action.payload],
+            dogsFiltered: [...arr, action.payload]
+        }
 
         default:
             return state;

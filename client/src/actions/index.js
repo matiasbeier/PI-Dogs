@@ -73,3 +73,25 @@ export const filterByApiOrDb = (value) =>{
 export const searchByNameLoading = (payload) =>{
     return {type: 'SEARCH_BY_NAME_LOADING', payload}
 }
+
+export const deleteDog = (id) =>{
+    return function(dispatch){
+        return axios.delete(`/dogs/${id}`)
+        .then(({data}) =>{
+            dispatch({type: 'DELETE_DOG', payload: data})
+        })
+        .then(() => alert("Dog deleted!"))
+        .catch(e => console.log(e))
+    }
+}
+
+export const modifyDog = (id, dogModified) =>{
+    return function(dispatch){
+        return axios.put(`/dogs/${id}`, dogModified)
+        .then(({data}) =>{
+            dispatch({type: 'MODIFY_DOG', payload: data})
+        })
+        .then(() => alert("Dog succesfully edited!"))
+        .catch(e => console.log(e))
+    }
+}

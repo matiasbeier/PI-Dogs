@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import s from './SearchBar.module.css'
 import {BiSearchAlt2} from 'react-icons/bi'
 
-const SearchBar = () =>{
+const SearchBar = ({setCurrentPage}) =>{
     const [name, setName] = useState("");
     const dispatch = useDispatch();
 
@@ -33,7 +33,7 @@ const SearchBar = () =>{
                     <input className={s.inputStyle} type="text" placeholder='search dog' onChange={e=> handleChange(e)} value={name} name="name"/>
                     <button className={s.btn}><BiSearchAlt2 className={s.icon}/></button>
                 </form>
-                <Filters />
+                <Filters setCurrentPage={setCurrentPage} />
                 <SortDog />
             </div>
     )

@@ -3,18 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { filterByTemperament, filterByApiOrDb } from '../../actions';
 import s from './Filters.module.css'
 
-const Filters = () =>{
+const Filters = ({setCurrentPage}) =>{
 
     const dispatch = useDispatch();
     const {temperaments} = useSelector(state => state)
 
     function handleFilterTemperament(e){
         dispatch(filterByTemperament(e.target.value));
-
+        setCurrentPage(1)
     }
 
     function handleFilterByApiOrDb(e){
         dispatch(filterByApiOrDb(e.target.value));
+        setCurrentPage(1)
     }
 
     return (

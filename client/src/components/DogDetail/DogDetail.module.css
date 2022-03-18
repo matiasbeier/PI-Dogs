@@ -21,3 +21,8 @@
     color:rgb(233, 227, 227);
     text-align: left;
 }
+.btn {
+    position: absolute;
+    top: 8rem;
+    right: 5rem;
+}

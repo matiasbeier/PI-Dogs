@@ -1,33 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { getTemperaments, createDog } from '../../actions';
-import validate from './validate';
+import { useDispatch, useSelector } from "react-redux";
+import { getTemperaments, modifyDog } from '../../actions';
+import validate from '../CreateDog/validate';
 import NavBar from '../NavBar/NavBar';
-import s from './CreateDog.module.css'
+import s from '../CreateDog/CreateDog.module.css'
 import h from '../Home/Home.module.css'
-import dog1 from './img/87bd5736efc515a1aa6e889c0fba4b1d.jpg'
-import dog2 from './img/b3b8a3afc65a17d2a16f072ea25a9a05.jpg'
-import dog3 from './img/bbf8b085602becb16675882a50296f2c.jpg'
-import dog4 from './img/bd79b8fbc1ec699fdf1f5c07cbc012bd.jpg'
+import dog1 from '../CreateDog/img/87bd5736efc515a1aa6e889c0fba4b1d.jpg'
+import dog2 from '../CreateDog/img/b3b8a3afc65a17d2a16f072ea25a9a05.jpg'
+import dog3 from '../CreateDog/img/bbf8b085602becb16675882a50296f2c.jpg'
+import dog4 from '../CreateDog/img/bd79b8fbc1ec699fdf1f5c07cbc012bd.jpg'
 
-const CreateDog = () => {
+const EditDog = () =>{
+    const {dog} = useSelector(state => state);
+    const dispatch = useDispatch();
+
+    let height = dog.height.metric.split(' - ')
+    let weight = dog.weight.metric.split(' - ')
+    let life_span = dog.life_span.split(' - ')
+    life_span[0] = life_span[0]?.split(' years')
+    life_span[1] = life_span[1]?.split(' years')
 
     const [input, setInput] = useState({
-        name: "",
-        temperament: [],
-        height_min: "",
-        height_max: "",
-        weight_min: "",
-        weight_max: "", 
-        life_span_min: "",
-        life_span_max: "",
-        origin: "",
-        image: ""
+        name: dog.name,
+        temperament: dog.temperament,
+        height_min: height[0],
+        height_max: height[1],
+        weight_min: weight[0],
+        weight_max: weight[1],
+        life_span_min: life_span[0] && life_span[0][0],
+        life_span_max: life_span[1] && life_span[1][0],
+        origin: dog.origin,
+        image: dog.image
     })
+
+
     const [error, setError] = useState({});
     const {temperaments} = useSelector(state => state);
-    const dispatch = useDispatch();
 
     useEffect(()=>{
         if(!temperaments.length) {
@@ -43,7 +51,7 @@ const CreateDog = () => {
     }
     function handleSubmit(e) {
         e.preventDefault();
-        dispatch(createDog(input))
+        dispatch(modifyDog(dog?.id, input))
     }
 
     function handleSelectTemperament(e){
@@ -130,7 +138,7 @@ const CreateDog = () => {
                 {
                     error.name || error.height || error.weight || error.life_span || error.origin || error.temperament
                     ? <button className={s.errorBtn} type='submit' disabled={true}>Create</button>
-                    : <button className={input.name === "" ? s.errorBtn : s.btn} type='submit' disabled={input.name === "" ? true : false}>Create</button>
+                    : <button className={input.name === "" ? s.errorBtn : s.btn} type='submit' disabled={input.name === "" ? true : false}>Edit</button>
                 }
             </form>
 
@@ -138,4 +146,4 @@ const CreateDog = () => {
     )
 }
 
-export default CreateDog;
+export default EditDog;

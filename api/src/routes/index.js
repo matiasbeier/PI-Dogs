@@ -103,6 +103,72 @@ router.get('/temperaments', async (req,res) =>{
 })
 
 
+router.put('/dogs/:id', async (req,res) =>{
+    try{
+        const {id} = req.params
+        const {name, 
+            height_min, 
+            height_max, 
+            weight_min, 
+            weight_max, 
+            life_span_min, 
+            life_span_max, 
+            origin, 
+            temperament, 
+            image
+        } = req.body.newDog;
+        if(name && height_min && height_max && weight_min && weight_max) {
+            const height = {metric: height_min + " - " + height_max};
+            const weight = {metric: weight_min + " - " + weight_max};
+            let life_span = ""
+            if(life_span_min && life_span_max){
+                life_span = life_span_min + " - " + life_span_max + " years";
+            } else if(life_span_min || life_span_max) {
+                life_span = (life_span_min ? life_span_min : life_span_max) + " years";
+            }
+                let number = await Dog.update({
+                    name: name[0].toUpperCase().concat(name.slice(1)),
+                    height: height,
+                    weight: weight,
+                    life_span: life_span ? life_span : null,
+                    origin: origin ? origin[0].toUpperCase().concat(origin.slice(1)) : null,
+                    image: {url: image},
+                },
+                {
+                    where: {
+                        id: id
+                    }
+                })
+                console.log(dog)
+                const dog = await Dog.findByPk(id)
+                const newDog = await dog.setTemperament(temperament);
+                return res.send(newDog);
+        } 
+        res.status(404).send('Fields name, height and weight are require');
+    } catch(e){
+        res.send(e);
+    }
+})
+
+
+router.delete('/dogs/:id', async (req,res) =>{
+    const {id} = req.params;
+    try{
+        const dog = await Dog.destroy({
+            where: {
+                id: id
+            }
+        })
+        console.log(dog)
+        if(dog) {
+            res.send(id)
+        } else {
+            res.status(400).send('dont exist a dog with that id')
+        }
+    }catch(e){
+        res.send(e)
+    }
+})
 
 
 module.exports = router;

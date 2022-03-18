@@ -19,10 +19,9 @@
     transition: .25s;
 }
 .card:hover{
-    /* background-color: rgb(107, 105, 105);; */
     color: aliceblue;
     opacity: .8;
-    box-shadow: 5px 10px rgb(71, 70, 70);
+    box-shadow: rgb(71, 70, 70);
     font-weight: bold;
 }
 
@@ -30,3 +29,41 @@
     background-color: rgb(34, 33, 33);
     opacity: .5;
 }
+.deleteUnderlined {
+    text-decoration: none;
+    color:aliceblue;
+}
+.btn {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    font-size: 1rem;
+    transition: .25s;
+}
+.btn:hover {
+    background-color: #000;
+    color:rgb(214, 211, 211);
+    box-shadow: 0 0 5px 5px #000;
+}
+.btn:hover::after {
+    position:absolute;
+    right: -4rem;
+    color:white;
+    content: "delete";
+    transition: 1s;
+}
+/* .deleteText {
+    padding-left: 1rem;
+    position: absolute;
+    top: 0rem;
+    right: 0rem;
+    color: transparent;
+    transition: 0.25s;
+}
+.deleteText:hover {
+    color: white;
+    
+} */

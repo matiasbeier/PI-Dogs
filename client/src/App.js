@@ -6,6 +6,7 @@ import Home from './components/Home/Home.jsx';
 import PageInitial from './components/PageInitial/PageInitial.jsx';
 import CreateDog from './components/CreateDog/CreateDog';
 import DogDetail from './components/DogDetail/DogDetail';
+import EditDog from './components/EditDog/EditDog';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path={'/home'} exact component={Home} />
       <Route path={'/home/dog/create'} exact component={CreateDog} />
       <Route path={'/home/dog/:id/detail/'} exact component={DogDetail} />
+      <Route path={'/home/dog/edit/:id'} exact component={EditDog} />
     </div>
   );
 }
