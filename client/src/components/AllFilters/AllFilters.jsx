@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { filterByTemperament, filterByApiOrDb } from '../../actions';
 import s from './Filters.module.css'
 
-const Filters = ({setCurrentPage}) =>{
+const AllFilters = ({setCurrentPage}) =>{
 
     const dispatch = useDispatch();
     const {temperaments} = useSelector(state => state)
@@ -43,4 +43,4 @@ const Filters = ({setCurrentPage}) =>{
     )
 }
 
-export default Filters;
+export default AllFilters;
