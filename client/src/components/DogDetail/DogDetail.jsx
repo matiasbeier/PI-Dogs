@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { getDogDetail, resetDogDetail, modifyDog } from '../../actions';
+import { getDogDetail, resetDogDetail } from '../../actions';
 import NavBar from "../NavBar/NavBar"
 import h from '../Home/Home.module.css'
 import s from './DogDetail.module.css'
