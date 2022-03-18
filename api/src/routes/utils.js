@@ -140,6 +140,25 @@ function fixWeight(weight){
     return weight;
 } 
 
+async function setTemperament(temperament, dog){
+    if(temperament.length){
+        if(typeof(temperament) === "string") temperament = temperament.split(',');
+        const t = await Temperament.findAll({
+            where: {
+                name: temperament.map(el => el[0].toUpperCase().concat(el.slice(1)))
+            }
+        })
+            dog.setTemperaments(t)
+    };
+    return {
+        id: dog.id,
+        name: dog.name,
+        image: dog.image,
+        temperament: temperament,
+        created_by_me: true
+    } 
+}
+
 
 module.exports = {
     getApiTemperaments,
@@ -147,5 +166,6 @@ module.exports = {
     getDogsDB,
     addTemperament,
     getDogByID,
-    fixWeight
+    fixWeight,
+    setTemperament
 }

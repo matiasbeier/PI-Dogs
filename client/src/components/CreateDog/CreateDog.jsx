@@ -52,14 +52,13 @@ const CreateDog = () => {
                 input.temperament.includes(e.target.value)
                 ? setInput({...input})
                 : setInput({...input, temperament: [...input.temperament, e.target.value] }) 
-               
         }
         if(typeof(input.temperament) === "string" && input.temperament !== ""){
-            
             let arr = input.temperament.split(',');
             setInput({...input, temperament: arr})
         }
     }
+
     function handleSelectImage(e){
         setInput({...input, image: e.target.value})
     }

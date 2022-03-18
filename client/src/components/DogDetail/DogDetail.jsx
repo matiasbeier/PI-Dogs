@@ -36,7 +36,7 @@ const DogDetail = ({match}) => {
                     {
                         dog.created_by_me === true &&
                         <Link to={`/home/dog/edit/${dog.id}`}>
-                        <button className={s.btn}>edit</button> 
+                        <button className={s.btn}>Edit</button> 
                         </Link>
                     }
                 </div>)

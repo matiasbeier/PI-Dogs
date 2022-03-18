@@ -18,10 +18,12 @@ const SortDog = () =>{
     return (
         <div className={s.container} >
             <select className={s.selectStyle} onChange={e => handleSortByName(e)} >
+                <optgroup label='name'></optgroup>
                 <option value="asc" >a-z</option>
                 <option value="desc" >z-a</option>
             </select>
             <select className={s.selectStyle} onChange={e => handleSortByWeigth(e)}>
+                <optgroup label='weight'></optgroup>
                 <option value="ligth">ligthweight</option>
                 <option value="heavy">heavyweight</option>
             </select>

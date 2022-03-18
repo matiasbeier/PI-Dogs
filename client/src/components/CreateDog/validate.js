@@ -47,22 +47,23 @@ export default function validate({
     if(!/^[aA-zZ\s+,-]*$/.test(temperament)){
         error.temperament = "temperament is invalid"
     } else if(typeof(temperament) === "string" && temperament !== ""){
-        const tempToArray = temperament.split(',')
-        for (let i = 0; i < tempToArray.length; i++) {
-            if(!temperaments.find(el => el.name.toLowerCase() === tempToArray[i].toLowerCase())){
+        temperament = temperament.split(',')
+        for (let i = 0; i < temperament.length; i++) {
+            if(!temperaments.find(el => el.name.toLowerCase() === temperament[i].toLowerCase())){
                 error.temperament = "only temperaments from list"
             } else{
                 error.temperament = null
             }
         }
     } else if(Array.isArray(temperament)){
-        
-        for (let i = 0; i <temperament.length; i++) {
-            if(temperament[i] === "") continue;
-            if(!temperaments.find(el => el === temperament[i])){
+        console.log(temperament)
+        const arrOfTemperaments = temperaments.map(t => t.name.toLowerCase())
+        for (let i = 0; i < temperament.length; i++) {
+            
+            if(!arrOfTemperaments.includes(temperament[i].toLowerCase())){
                 error.temperament = "only temperaments from list"
             }
-        }      
+        }
     }
     
     return error;

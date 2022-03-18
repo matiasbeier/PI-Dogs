@@ -16,20 +16,23 @@ const EditDog = () =>{
 
     let height = dog.height.metric.split(' - ')
     let weight = dog.weight.metric.split(' - ')
-    let life_span = dog.life_span.split(' - ')
-    life_span[0] = life_span[0]?.split(' years')
-    life_span[1] = life_span[1]?.split(' years')
+    let life_span = ""
+    if(dog.life_span){
+        life_span = dog.life_span.split(' - ')
+        life_span[0] = life_span[0]?.split(' years')
+        life_span[1] = life_span[1]?.split(' years')
+    }
 
     const [input, setInput] = useState({
         name: dog.name,
-        temperament: dog.temperament,
+        temperament: dog.temperament ? dog.temperament : [],
         height_min: height[0],
         height_max: height[1],
         weight_min: weight[0],
         weight_max: weight[1],
-        life_span_min: life_span[0] && life_span[0][0],
-        life_span_max: life_span[1] && life_span[1][0],
-        origin: dog.origin,
+        life_span_min: life_span ? life_span[0] && life_span[0][0] : "",
+        life_span_max: life_span ? life_span[1] && life_span[1][0] : "",
+        origin: dog.origin ? dog.origin : "",
         image: dog.image
     })
 

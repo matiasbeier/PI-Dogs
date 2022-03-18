@@ -20,12 +20,14 @@ const Filters = ({setCurrentPage}) =>{
 
     return (
         <div className={s.container} >
-            <select className={s.selectStyle} onChange={e =>handleFilterByApiOrDb(e)} >
-                <option value="all">All</option>
-                <option value={false}>Existings</option>
-                <option value={true}>Created</option>
+            <select className={s.selectStyle} onChange={e =>handleFilterByApiOrDb(e)}>
+                <optgroup label='existence'></optgroup>
+                    <option value="all">All</option>
+                    <option value={false}>Existings</option>
+                    <option value={true}>Created</option>
             </select>
             <select className={s.selectStyle} onChange={e =>handleFilterTemperament(e)} >
+                <optgroup label='temperaments'></optgroup>
                 <option value="all">All</option>
                 {
                     temperaments?.map(temp =>{

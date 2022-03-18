@@ -2,7 +2,7 @@ const { Router } = require('express');
 const {Dog, Temperament} = require('../db.js');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-const {getApiTemperaments, getDogsAPI, getDogsDB, addTemperament, getDogByID, fixWeight} = require('./utils.js');
+const {getApiTemperaments, getDogsAPI, getDogsDB, addTemperament, getDogByID, fixWeight, setTemperament} = require('./utils.js');
 
 const router = Router();
 
@@ -10,47 +10,50 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 router.post('/dogs', async (req,res) =>{
-    const {name, 
-        height_min, 
-        height_max, 
-        weight_min, 
-        weight_max, 
-        life_span_min, 
-        life_span_max, 
-        origin, 
-        temperament, 
-        image
-    } = req.body.newDog;
-    if(name && height_min && height_max && weight_min && weight_max) {
-        const height = {metric: height_min + " - " + height_max};
-        const weight = {metric: weight_min + " - " + weight_max};
-        let life_span = ""
-        if(life_span_min && life_span_max){
-            life_span = life_span_min + " - " + life_span_max + " years";
-        } else if(life_span_min || life_span_max) {
-            life_span = (life_span_min ? life_span_min : life_span_max) + " years";
-        }
-        try{
+    try{
+        const {name, 
+            height_min, 
+            height_max, 
+            weight_min, 
+            weight_max, 
+            life_span_min, 
+            life_span_max, 
+            origin, 
+            temperament, 
+            image
+        } = req.body.newDog;
+        if(name && height_min && height_max && weight_min && weight_max) {
+            const height = {metric: height_min + " - " + height_max};
+            const weight = {metric: weight_min + " - " + weight_max};
+            let life_span = ""
+            if(life_span_min && life_span_max){
+                life_span = life_span_min + " - " + life_span_max + " years";
+            } else if(life_span_min || life_span_max) {
+                life_span = (life_span_min ? life_span_min : life_span_max) + " years";
+            }
             let dog = await Dog.create({
-                    name: name[0].toUpperCase().concat(name.slice(1)),
-                    height,
-                    weight,
-                    life_span: life_span ? life_span : null,
-                    origin: origin ? origin[0].toUpperCase().concat(origin.slice(1)) : null,
-                    image: {url: image},
+                name: name[0].toUpperCase().concat(name.slice(1)),
+                height,
+                weight,
+                life_span: life_span ? life_span : null,
+                origin: origin ? origin[0].toUpperCase().concat(origin.slice(1)) : null,
+                image: {url: image},
             })
+            console.log(dog)
             const newDog = await addTemperament(temperament, dog);
             return res.send(newDog);
-        } catch(e){
-            return res.send(e);
+        } else{
+            res.status(404).send('Fields name, height and weight are require');
         }
+    } catch(e){
+        res.send(e);
     } 
-    res.status(404).send('Fields name, height and weight are require');
 })
 
 
 router.get('/dogs', async (req,res) =>{
-    let {name} = req.query;
+    try {
+        let {name} = req.query;
         const [dogsAPI, dogsDB ] = await Promise.all([getDogsAPI(name), getDogsDB(name)])
         if(dogsAPI || dogsDB){
             let total = dogsAPI.concat(dogsDB);
@@ -68,6 +71,9 @@ router.get('/dogs', async (req,res) =>{
         } else {
             res.status(404).send('No dogs with that name were found')
         }
+    } catch (e) {
+        res.send(e)
+    }
 })
 
 
@@ -116,7 +122,7 @@ router.put('/dogs/:id', async (req,res) =>{
             origin, 
             temperament, 
             image
-        } = req.body.newDog;
+        } = req.body;
         if(name && height_min && height_max && weight_min && weight_max) {
             const height = {metric: height_min + " - " + height_max};
             const weight = {metric: weight_min + " - " + weight_max};
@@ -139,9 +145,9 @@ router.put('/dogs/:id', async (req,res) =>{
                         id: id
                     }
                 })
-                console.log(dog)
+                console.log(number)
                 const dog = await Dog.findByPk(id)
-                const newDog = await dog.setTemperament(temperament);
+                const newDog = await setTemperament(temperament, dog)
                 return res.send(newDog);
         } 
         res.status(404).send('Fields name, height and weight are require');
