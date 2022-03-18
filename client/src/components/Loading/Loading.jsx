@@ -1,8 +1,9 @@
 import React from 'react'
+import image from './animated-dog-image-0077.gif'
 
 const Loading = () =>{
     return (
-        <img src="https://www.animatedimages.org/data/media/202/animated-dog-image-0077.gif" alt="loading" />
+        <img src={image} alt="loading" />
     )
 }
 

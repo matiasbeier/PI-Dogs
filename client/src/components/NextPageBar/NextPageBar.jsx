@@ -16,10 +16,10 @@ const NextPageBar = ({postPerPage, totalPost, paginate, currentPage}) =>{
         <nav>
             <ol className={s.ol}>
                 <li>
-                    <a onClick={() => paginate(1)} href='#!' className={s.symbolStyle}><BiFirstPage/></a>
+                    <a onClick={() => paginate(1)} href='#!' className={totalPage.length ? s.symbolStyle : s.notSymbol}><BiFirstPage/></a>
                 </li>
                 <li>
-                    <a onClick={() => paginate(currentPage > 1 ? currentPage - 1 : currentPage)} href='#!' className={s.symbolStyle}><MdOutlineNavigateBefore/></a>
+                    <a onClick={() => paginate(currentPage > 1 ? currentPage - 1 : currentPage)} href='#!' className={totalPage.length ? s.symbolStyle : s.notSymbol}><MdOutlineNavigateBefore/></a>
                 </li>
                 {
                     PageRender?.map(number =>{
@@ -33,10 +33,10 @@ const NextPageBar = ({postPerPage, totalPost, paginate, currentPage}) =>{
                     })
                 }
                 <li>
-                    <a onClick={() => paginate(currentPage < totalPage.length ? currentPage + 1 : currentPage)} href='#!' className={s.symbolStyle} ><MdNavigateNext/></a>
+                    <a onClick={() => paginate(currentPage < totalPage.length ? currentPage + 1 : currentPage)} href='#!' className={totalPage.length ? s.symbolStyle : s.notSymbol} ><MdNavigateNext/></a>
                 </li>
                 <li>
-                    <a onClick={() => paginate(totalPage.length)} href='#!' className={s.symbolStyle}><BiLastPage/></a>
+                    <a onClick={() => paginate(totalPage.length)} href='#!' className={totalPage.length ? s.symbolStyle : s.notSymbol}><BiLastPage/></a>
                 </li>
             </ol>
         </nav>

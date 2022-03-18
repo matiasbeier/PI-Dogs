@@ -42,3 +42,6 @@
     color: aliceblue;
     font-weight: bold;
 }
+.notSymbol {
+    display: none;
+}

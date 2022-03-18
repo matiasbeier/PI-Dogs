@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import Dog from '../Dog/Dog'
 import Loading from '../Loading/Loading'
 import s from './Dogs.module.css'
+import image from './28459274-illustration-de-bande-dessinée-de-chien-ou-chiot-triste-mignon.jpg'
 
 const Dogs = ({currentDogs}) =>{
     const {loading} = useSelector(state => state);
@@ -37,7 +38,7 @@ const Dogs = ({currentDogs}) =>{
                 : (
                     <div className={s.dogNotFound} >
                         <h1 className={s.title} >No dogs with that name were found</h1>
-                        <img className={s.image} src="https://previews.123rf.com/images/izakowski/izakowski1405/izakowski140500094/28459274-illustration-de-bande-dessin%C3%A9e-de-chien-ou-chiot-triste-mignon.jpg" alt="not found" />
+                        <img className={s.image} src={image} alt="not found" />
                     </div>
                 )
             }
