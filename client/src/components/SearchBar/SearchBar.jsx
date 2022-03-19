@@ -25,6 +25,7 @@ const SearchBar = ({setCurrentPage}) =>{
             dispatch(searchByNameLoading(false))
         })
         setName("")
+        setCurrentPage(1)
     }
 
     return (
