@@ -39,7 +39,7 @@ const Home = () =>{
         ? <Loading/>
         : (
             <div className={s.gradient} >
-                <NavBar />
+                <NavBar setCurrentPage={setCurrentPage}/>
                 <SearchBar setCurrentPage={setCurrentPage}/>
                 <NextPageBar postPerPage={dogsPerPage} totalPost={dogsFiltered?.length} paginate={paginate} currentPage={currentPage}/>
                 <Dogs currentDogs={currentDogs} />

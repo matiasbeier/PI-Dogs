@@ -6,13 +6,14 @@ import { Link } from 'react-router-dom';
 import { getAllDogs } from '../../actions';
 import s from './NavBar.module.css'
 
-const NavBar = () =>{
+const NavBar = ({setCurrentPage}) =>{
     const location = useLocation();
     const dispatch = useDispatch();
 
     function handleRefresh(e){
         e.preventDefault();
         dispatch(getAllDogs());
+        setCurrentPage(1)
     }
 
     return (
