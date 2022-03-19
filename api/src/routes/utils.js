@@ -42,7 +42,7 @@ async function getDogsAPI(name){
 
 async function getDogsDB(name){
     if(name) {
-        name = name[0].toUpperCase() + name.slice(1)
+        name = name[0].toUpperCase() + name.slice(1).toLowerCase()
         const races = await Dog.findAll({
             where: {
                 name: {

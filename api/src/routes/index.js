@@ -32,7 +32,7 @@ router.post('/dogs', async (req,res) =>{
                 life_span = (life_span_min ? life_span_min : life_span_max) + " years";
             }
             let dog = await Dog.create({
-                name: name[0].toUpperCase().concat(name.slice(1)),
+                name: name[0].toUpperCase().concat(name.slice(1).toLoWerCase()),
                 height,
                 weight,
                 life_span: life_span ? life_span : null,
