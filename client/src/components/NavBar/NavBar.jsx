@@ -13,7 +13,7 @@ const NavBar = ({setCurrentPage}) =>{
     function handleRefresh(e){
         e.preventDefault();
         dispatch(getAllDogs())
-        .then(() => setCurrentPage(1))
+        setCurrentPage(1)
     }
 
     return (
