@@ -31,7 +31,7 @@ const SearchBar = ({setCurrentPage}) =>{
     return (
             <div className={s.search}>
                 <form onSubmit={e=> handleSubmit(e)}>
-                    <input className={s.inputStyle} type="text" placeholder='search dog' onChange={e=> handleChange(e)} value={name} name="name"/>
+                    <input className={s.inputStyle} type="text" placeholder='search dog' onChange={e=> handleChange(e)} value={name}/>
                     <button className={s.btn}><BiSearchAlt2 className={s.icon}/></button>
                 </form>
                 <Filters setCurrentPage={setCurrentPage} />
