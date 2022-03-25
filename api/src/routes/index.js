@@ -22,6 +22,7 @@ router.post('/dogs', async (req,res) =>{
             temperament, 
             image
         } = req.body.newDog;
+        console.log(req.body.newDog)
         if(name && height_min && height_max && weight_min && weight_max) {
             const height = {metric: height_min + " - " + height_max};
             const weight = {metric: weight_min + " - " + weight_max};
