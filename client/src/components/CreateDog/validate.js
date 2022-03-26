@@ -56,7 +56,6 @@ export default function validate({
             }
         }
     } else if(Array.isArray(temperament)){
-        console.log(temperament)
         const arrOfTemperaments = temperaments.map(t => t.name.toLowerCase())
         for (let i = 0; i < temperament.length; i++) {
             

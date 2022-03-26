@@ -22,7 +22,6 @@ router.post('/dogs', async (req,res) =>{
             temperament, 
             image
         } = req.body.newDog;
-        console.log(req.body.newDog)
         if(name && height_min && height_max && weight_min && weight_max) {
             const height = {metric: height_min + " - " + height_max};
             const weight = {metric: weight_min + " - " + weight_max};
@@ -33,14 +32,13 @@ router.post('/dogs', async (req,res) =>{
                 life_span = (life_span_min ? life_span_min : life_span_max) + " years";
             }
             let dog = await Dog.create({
-                name: name[0].toUpperCase().concat(name.slice(1).toLoWerCase()),
+                name: name[0].toUpperCase().concat((name.slice(1)).toLowerCase()),
                 height,
                 weight,
                 life_span: life_span ? life_span : null,
                 origin: origin ? origin[0].toUpperCase().concat(origin.slice(1)) : null,
                 image: {url: image},
             })
-            console.log(dog)
             const newDog = await addTemperament(temperament, dog);
             return res.send(newDog);
         } else{
