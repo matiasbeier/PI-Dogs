@@ -20,12 +20,12 @@ const EditDog = () =>{
     if(dog.life_span){
         life_span = dog.life_span.split(' - ')
         life_span[0] = life_span[0]?.split(' years')
-        life_span[1] = life_span[1]?.split(' years')
+        life_span[1] = life_span[1] !== undefined ? life_span[1]?.split(' years') : life_span[1] = ""
     }
 
     const [input, setInput] = useState({
         name: dog.name,
-        temperament: dog.temperament ? dog.temperament : [],
+        temperament: dog.temperament ? dog.temperament.split(", ").join(",") : [],
         height_min: height[0],
         height_max: height[1],
         weight_min: weight[0],

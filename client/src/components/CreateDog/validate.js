@@ -29,12 +29,12 @@ export default function validate({
         error.life_span = "the parameter left should be smaller than rigth"
     } else if(life_span_min !== "" || life_span_max !== "") {
         if(life_span_min !== "" && life_span_max !== ""){
-            if(!/^[0-9]*$/.test(life_span_min) || !/^[0-9]*$/.test(life_span_max)){
+            if(!/^[0-9]*$/.test(parseInt(life_span_min)) || !/^[0-9]*$/.test(parseInt(life_span_max))){
                 error.life_span = "life-span should be a number"
             }  
-        } else if((life_span_min !== "") && (!/^[0-9]*$/.test(life_span_min))) {
+        } else if((life_span_min !== "") && (!/^[0-9]*$/.test(parseInt(life_span_min)))) {
             error.life_span = "life-span should be a number"
-        } else if ((life_span_max !== "") && !/^[0-9]*$/.test(life_span_max)) {
+        } else if ((life_span_max !== "") && !/^[0-9]*$/.test(parseInt(life_span_max))) {
             error.life_span = "life-span should be a number"
         }
     }
