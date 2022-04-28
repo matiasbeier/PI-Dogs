@@ -1,5 +1,5 @@
 .container{
-    margin-top: 3.5rem;
+    margin-top: 8rem;
     font-size: 1.5rem;
     font-weight: bold;
     color: aliceblue;
@@ -27,7 +27,7 @@
     transition: .25s;
 }
 .btn:hover{
-    background-color: transparent;
+    background-color: rgb(167, 164, 164);
 }
 .selectStyle{
     font-size: 1.25rem;
@@ -58,7 +58,7 @@
     font-size: 1.5rem;
     padding: 1rem;
     border-radius: 1rem;
-    background-color: transparent;
+    background-color: rgb(167, 164, 164);
     font-weight: bold;
     margin-top: 1rem;
 }

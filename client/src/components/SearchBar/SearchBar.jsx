@@ -34,8 +34,10 @@ const SearchBar = ({setCurrentPage}) =>{
                     <input className={s.inputStyle} type="text" placeholder='search dog' onChange={e=> handleChange(e)} value={name}/>
                     <button className={s.btn}><BiSearchAlt2 className={s.icon}/></button>
                 </form>
-                <Filters setCurrentPage={setCurrentPage} />
-                <SortDog />
+                <div className={s.containerFilters} >
+                    <Filters setCurrentPage={setCurrentPage} />
+                    <SortDog />
+                </div>
             </div>
     )
 }

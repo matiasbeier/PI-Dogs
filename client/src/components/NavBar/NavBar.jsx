@@ -17,19 +17,16 @@ const NavBar = ({setCurrentPage}) =>{
     }
 
     return (
-        <>
+        <div className={s.container} >
             {
                 location.pathname === '/home'
                 ? (
                 <>
-                    <div className={s.container2}></div>
-                    <div className={s.container3}></div>
                     <button onClick={e => handleRefresh(e)} className={s.btn1}>Home</button>
                 </>
                 )
                 : (
                     <>
-                        <div className={s.container}></div> 
                         <Link to='/home'>
                             <button className={s.btn1}>Home</button>
                         </Link>
@@ -43,7 +40,7 @@ const NavBar = ({setCurrentPage}) =>{
                     </Link>
             }
 
-        </>
+        </div>
     )
 }
 

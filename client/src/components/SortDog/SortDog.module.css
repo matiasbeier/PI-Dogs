@@ -11,10 +11,5 @@
     color: aliceblue;
 }
 .container{
-    position: absolute;
-    width: 100%;
-    max-width: fit-content;
-    margin-left: 45rem;
-    margin-top: -1.65rem;
-    justify-content: space-between;
+
 }

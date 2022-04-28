@@ -41,3 +41,9 @@
     color: rgb(214, 211, 211);
     font-size: 3rem;
 }
+
+@media screen and (max-width: 500px) {
+    .phrase{
+        right: 0rem;
+    }
+  }

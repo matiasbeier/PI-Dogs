@@ -1,10 +1,11 @@
 .container {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
     display: flex;
     flex-wrap: wrap;
     gap: 4rem;
     font-size: .8rem;
     list-style: none;
-
 }
 
 .deleteUnderlined {
@@ -25,3 +26,8 @@
     height: 25rem;
     width: 20rem;
 }
+@media screen and (max-width: 500px) {
+    .container {
+        justify-content: center;
+    }
+  }

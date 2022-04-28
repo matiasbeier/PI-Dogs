@@ -11,11 +11,12 @@
 .container{
     width: 100%;
     height: 100%;
+    position: relative;
 }
 .text{
     position: absolute;
-    margin-left: 30rem;
-    margin-top: 1rem;
+    left: 30rem;
+    top: 5rem;
     max-width: 50rem;
     font-size: 1.5rem;
     color:rgb(233, 227, 227);
@@ -24,16 +25,34 @@
 .btn {
     position: absolute;
     top: 8rem;
-    right: 5rem;
+    right: 10rem;
     font-size: 1.5rem;
     padding: 1rem;
     border-radius: 1rem;
     background-color: rgb(224, 218, 218);
     font-weight: bold;
-    margin-top: 1rem;
     cursor: pointer;
     transition: .5s;
 }
 .btn:hover {
     background-color: rgb(167, 164, 164);
 }
+
+@media screen and (max-width: 500px) {
+    .text{
+        left: 4.7rem;
+        top: 27rem;
+        font-size: 1rem;
+        max-width: 300px;
+    }
+    .image{
+        position: absolute;
+        height: 18rem;
+        width: 18rem;
+        left: 4.7rem;
+    }
+    .btn {
+        top: 28rem;
+        right: 2rem;
+    }
+  }
